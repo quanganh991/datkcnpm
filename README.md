@@ -1,6 +1,6 @@
 # datk
 
-A new Flutter project.
+VietStenoGame: Ứng dụng gõ tốc ký 2 người chơi trên thiết bị di động
 
 ## Getting Started
 
