@@ -27,6 +27,45 @@ class StenoRightKeyboard extends State<StenoRight> {
   Color btnU = Color(0xFFFFFFFF);
   Color btnO = Color(0xFFFFFFFF);
 
+
+  String cache = '';
+  double _progressValue = 0.0;
+
+  void _updateProgress() {
+    print(
+        "------------------------------Đã thêm chữ vào cache, cache hiện tại  = " +
+            cache +
+            ", _progressValue = " +
+            _progressValue.toString());
+    const oneSec = const Duration(seconds: 1);
+    new Timer.periodic(oneSec, (Timer t) {
+      setState(() {
+        _progressValue += 1.0 / 3;
+        // we "finish" downloading here
+        if (_progressValue.toStringAsFixed(1) == '1.0') {
+          _progressValue = 0.0;
+          if (cache != '') {
+            save_keyword_to_firestore.save_to_DB(cache);
+          }
+          cache = '';
+          t.cancel();
+          return;
+        }
+      });
+    });
+  }
+
+  void add_text_to_cache(String text) {
+    _progressValue = 0.0;
+    cache += text;
+    _updateProgress();
+  }
+
+  void initState() {
+    super.initState();
+  }
+
+
   Widget build(BuildContext context) {
 
 
@@ -58,7 +97,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
 
-                    save_keyword_to_firestore.save_to_DB('*');
+                    add_text_to_cache('*');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -99,7 +138,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnK = (btnK == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('w');
+                    add_text_to_cache('w');
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
                         btnK = Color(0xFFFFFFFF);
@@ -139,7 +178,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnR = (btnR == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('j');
+                    add_text_to_cache('j');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -180,7 +219,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnN1 = (btnN1 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('n');
+                    add_text_to_cache('n');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -221,7 +260,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnH1 = (btnH1 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('t');
+                    add_text_to_cache('t');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -267,7 +306,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnT = (btnT == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('i');
+                    add_text_to_cache('i');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -308,7 +347,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnP = (btnP == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('y');
+                    add_text_to_cache('y');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -349,7 +388,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnH2 = (btnH2 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('j');
+                    add_text_to_cache('j');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -390,7 +429,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnN2 = (btnN2 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('g');
+                    add_text_to_cache('g');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -431,7 +470,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnS2 = (btnS2 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('k');
+                    add_text_to_cache('k');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -477,7 +516,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnU = (btnU == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('e');
+                    add_text_to_cache('e');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -518,7 +557,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     btnO = (btnO == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('a');
+                    add_text_to_cache('a');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {

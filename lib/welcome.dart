@@ -11,6 +11,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'HOC/Selection.dart';
 import 'THI_DAU/Selection.dart';
+import 'package:device_info/device_info.dart';
+import 'package:datk/keyboard/get_device_info.dart';
+
+import 'dialogs/dialog_Partner_Management.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -22,6 +26,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,15 +67,29 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Column(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.settings),
-                            onPressed: () {},
+                            icon: Icon(Icons.connect_without_contact),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => FutureBuilder(
+                                    future: get_device_info.device_info(),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot smartphone) {
+                                      if (smartphone.hasData) {
+                                        return DialogPartnerManagement(
+                                            device_info: smartphone.data);
+                                      } else
+                                        return Container();
+                                    }),
+                              );
+                            },
                             color: Color(0xFFFFFFFF),
                           ),
                           Container(
                             color: Color(0xFF00001E),
                             padding: EdgeInsets.symmetric(horizontal: 3.0),
                             margin: EdgeInsets.symmetric(horizontal: 3.0),
-                            child: Text("Cài đặt",
+                            child: Text("Đối tác",
                                 style: TextStyle(color: Color(0xFFFFFFFF))),
                           ),
                         ],

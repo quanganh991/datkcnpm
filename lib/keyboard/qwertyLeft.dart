@@ -43,7 +43,42 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
   Color btnCtrl = Color(0xFFFFFFFF);
   Color btnWindows = Color(0xFFFFFFFF);
   Color btnSpace = Color(0xFFFFFFFF);
+  String cache = '';
+  double _progressValue = 0.0;
 
+  void _updateProgress() {
+    print(
+        "------------------------------Đã thêm chữ vào cache, cache hiện tại  = " +
+            cache +
+            ", _progressValue = " +
+            _progressValue.toString());
+    const oneSec = const Duration(seconds: 1);
+    new Timer.periodic(oneSec, (Timer t) {
+      setState(() {
+        _progressValue += 1.0 / 3;
+        // we "finish" downloading here
+        if (_progressValue.toStringAsFixed(1) == '1.0') {
+          _progressValue = 0.0;
+          if (cache != '') {
+            save_keyword_to_firestore.save_to_DB(cache);
+          }
+          cache = '';
+          t.cancel();
+          return;
+        }
+      });
+    });
+  }
+
+  void add_text_to_cache(String text) {
+    _progressValue = 0.0;
+    cache += text;
+    _updateProgress();
+  }
+
+  void initState() {
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 3, left: 3, right: 3, top: 35),
@@ -121,7 +156,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btn1 = (btn1 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('1');
+                    add_text_to_cache('1');
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
                         btn1 = Color(0xFFFFFFFF);
@@ -172,7 +207,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btn2 = (btn2 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('2');
+                    add_text_to_cache('2');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -224,7 +259,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btn3 = (btn3 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('3');
+                    add_text_to_cache('3');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -276,7 +311,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btn4 = (btn4 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('4');
+                    add_text_to_cache('4');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -328,7 +363,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btn5 = (btn5 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('5');
+                    add_text_to_cache('5');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -380,7 +415,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btn6 = (btn6 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('6');
+                    add_text_to_cache('6');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -432,7 +467,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btn7 = (btn7 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('7');
+                    add_text_to_cache('7');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -528,7 +563,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnQ = (btnQ == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('s');
+                    add_text_to_cache('s');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -581,7 +616,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnW = (btnW == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('k');
+                    add_text_to_cache('k');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -634,7 +669,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnE = (btnE == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('r');
+                    add_text_to_cache('r');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -687,7 +722,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnR = (btnR == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('n');
+                    add_text_to_cache('n');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -740,7 +775,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnT = (btnT == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('h');
+                    add_text_to_cache('h');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -793,7 +828,6 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnY = (btnY == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('y');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -879,7 +913,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnA = (btnA == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('t');
+                    add_text_to_cache('t');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -932,7 +966,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnS = (btnS == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('p');
+                    add_text_to_cache('p');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -985,7 +1019,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnD = (btnD == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('h');
+                    add_text_to_cache('h');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -1038,7 +1072,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnF = (btnF == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('n');
+                    add_text_to_cache('n');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -1091,7 +1125,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnG = (btnG == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('s');
+                    add_text_to_cache('s');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -1309,7 +1343,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnC = (btnC == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('u');
+                    add_text_to_cache('u');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
@@ -1362,7 +1396,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                     btnV = (btnV == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    save_keyword_to_firestore.save_to_DB('o');
+                    add_text_to_cache('o');
 
                     Timer(Duration(milliseconds: 500), () {
                       setState(() {
