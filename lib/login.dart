@@ -9,7 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:datk/mapping_steno.dart';
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key, required this.title}) : super(key: key);
 
@@ -37,6 +37,8 @@ class LoginScreenState extends State<LoginScreen> {
 
     _loading = true;
     _updateProgress();
+
+    // mapping_steno.qwerty_to_steno();
   }
 
   void isSignedIn() async {
@@ -49,7 +51,7 @@ class LoginScreenState extends State<LoginScreen> {
         await SharedPreferences.getInstance(); //moi các trường trong firebase
     print("prefs đăng xuất = " + prefs.toString());
 
-    // await googleSignIn.signOut();
+    await googleSignIn.signOut();
     isLoggedIn = await googleSignIn.isSignedIn();
     print("isLoggedIn = " + isLoggedIn.toString());
     if (isLoggedIn) {

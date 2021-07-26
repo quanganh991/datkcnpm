@@ -13,7 +13,7 @@ class RightScreen extends StatefulWidget {
 class RightScreenState extends State<RightScreen> {
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: new BoxConstraints(
+      constraints: BoxConstraints(
         // minHeight: 15.0,
         maxHeight: MediaQuery.of(context).size.width * 0.75,
       ),

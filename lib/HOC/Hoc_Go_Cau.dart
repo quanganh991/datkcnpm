@@ -1,3 +1,4 @@
+import 'package:datk/dialogs/dialog_learning_dictionary.dart';
 import 'package:datk/dialogs/dialog_typing_state_information.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,6 +45,22 @@ class HocGoCauSelectionState extends State<HocGoCauSelection> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Center(
+                    child: IconButton(
+                      icon: Icon(Icons.book_outlined),
+                      onPressed: () => {
+                        Navigator.push(
+                          //điều hướng sang màn hình mới
+                          context, //điều hướng từ
+                          MaterialPageRoute(
+                            //điều hướng sang
+                            builder: (context) => DialogTraTuDien(),
+                          ),
+                        )
+                      },
+                      color: Colors.grey,
+                    ),
+                  ),
                   Center(
                     child: IconButton(
                       icon: Icon(Icons.details),

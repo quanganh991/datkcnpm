@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:datk/image/configs.dart';
 
 class LeftScreen extends StatefulWidget {
   @override
@@ -9,6 +10,8 @@ class LeftScreen extends StatefulWidget {
 }
 
 class LeftScreenState extends State<LeftScreen> {
+  String tu_can_go = configs.random_words();
+
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
@@ -47,7 +50,11 @@ class LeftScreenState extends State<LeftScreen> {
                   margin: EdgeInsets.symmetric(horizontal: 6.0),
                   child: IconButton(
                     icon: Icon(Icons.play_arrow),
-                    onPressed: () => {},
+                    onPressed: () => {
+                      setState(() {
+                        tu_can_go = configs.random_words();
+                      })
+                    },
                     color: Colors.grey,
                   ),
                 ),
@@ -65,7 +72,7 @@ class LeftScreenState extends State<LeftScreen> {
                 decoration:
                     BoxDecoration(border: Border.all(color: Colors.red)),
                 child: Text(
-                  'Aloha',
+                  tu_can_go,
                   style: TextStyle(color: Colors.purple, fontSize: 20),
                 ),
               ),
@@ -114,15 +121,42 @@ class LeftScreenState extends State<LeftScreen> {
                         .collection('hoc')
                         .orderBy('time', descending: true)
                         .limit(1)
-                        .snapshots(),
+                        .snapshots(), //lấy từ vừa gõ
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
-                        return Text(
-                            snapshot.data.docs[0]
-                                .data()['content']
-                                .toString(),
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
-                        );
+                        String begin = snapshot.data.docs[0]
+                            .data()['content']
+                            .toString()
+                            .toUpperCase(); //từ vừa gõ
+                        print('---------------begin == ' + begin);
+                        return StreamBuilder(
+                            //realtime
+                            stream: FirebaseFirestore.instance
+                                .collection('datk') //from messages
+                                .doc('dictionary')
+                                .collection('dictionary')
+                                .doc(begin) //tìm trong bộ từ điển
+                                .snapshots(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot mapping_word) {
+                              if (!mapping_word.hasData ||
+                                  !mapping_word.data.exists) {
+                                return Text(
+                                  'Bạn đã gõ sai, xin mời gõ lại',
+                                  //trả về từ tiếng việt của từ gõ tốc ký tương ứng
+                                  style: TextStyle(
+                                      color: Colors.purple, fontSize: 20),
+                                );
+                                ;
+                              } else {
+                                return Text(
+                                  mapping_word.data[begin].toString(),
+                                  //trả về từ tiếng việt của từ gõ tốc ký tương ứng
+                                  style: TextStyle(
+                                      color: Colors.purple, fontSize: 20),
+                                );
+                              }
+                            });
                       } else {
                         return Container();
                       }
