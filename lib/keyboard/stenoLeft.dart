@@ -26,37 +26,8 @@ class StenoLeftKeyboard extends State<StenoLeft> {
   Color btnU = Color(0xFFFFFFFF);
   Color btnO = Color(0xFFFFFFFF);
 
-  String cache = '';
-  double _progressValue = 0.0;
-
-  void _updateProgress() {
-    print(
-        "------------------------------Đã thêm chữ vào cache, cache hiện tại  = " +
-            cache +
-            ", _progressValue = " +
-            _progressValue.toString());
-    const oneSec = const Duration(seconds: 1);
-    new Timer.periodic(oneSec, (Timer t) {
-      setState(() {
-        _progressValue += 1.0 / 3;
-        // we "finish" downloading here
-        if (_progressValue.toStringAsFixed(1) == '1.0') {
-          _progressValue = 0.0;
-          if (cache != '') {
-            save_keyword_to_firestore.save_to_DB(cache);
-          }
-          cache = '';
-          t.cancel();
-          return;
-        }
-      });
-    });
-  }
-
   void add_text_to_cache(String text) {
-    _progressValue = 0.0;
-    cache += text;
-    _updateProgress();
+    save_keyword_to_firestore.save_to_dart(text);
   }
 
   void initState() {
@@ -88,7 +59,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
                   });
-                  // save_keyword_to_firestore.save_to_DB('s');
                   add_text_to_cache('s');
 
                   Timer(Duration(milliseconds: 500), () {
@@ -125,7 +95,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnK = (btnK == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('k');
                     add_text_to_cache('k');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -163,7 +132,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnR = (btnR == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('r');
                     add_text_to_cache('r');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -201,7 +169,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnN1 = (btnN1 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('n');
                     add_text_to_cache('n');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -239,7 +206,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnH1 = (btnH1 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('h');
                     add_text_to_cache('h');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -282,7 +248,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnT = (btnT == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('t');
                     add_text_to_cache('t');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -320,7 +285,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnP = (btnP == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('p');
                     add_text_to_cache('p');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -358,7 +322,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnH2 = (btnH2 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('h');
                     add_text_to_cache('h');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -396,7 +359,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnN2 = (btnN2 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('n');
                     add_text_to_cache('n');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -434,7 +396,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnS2 = (btnS2 == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('s');
                     add_text_to_cache('s');
 
                     Timer(Duration(milliseconds: 500), () {
@@ -471,7 +432,9 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 minWidth: 0,
                 height: 0,
-                onPressed: () {},
+                onPressed: () {
+                  save_keyword_to_firestore.save_to_DB();
+                },
                 child: Container(
                   height: 80.0,
                   width: 240.0,
@@ -497,7 +460,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnU = (btnU == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('u');
                     add_text_to_cache('u');
 
 
@@ -536,7 +498,6 @@ class StenoLeftKeyboard extends State<StenoLeft> {
                     btnO = (btnO == Color(0xFF81FFBA))
                         ? Color(0xFFFFFFFF)
                         : Color(0xFF81FFBA);
-                    // save_keyword_to_firestore.save_to_DB('o');
                     add_text_to_cache('o');
 
                     Timer(Duration(milliseconds: 500), () {

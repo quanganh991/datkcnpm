@@ -43,37 +43,9 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
   Color btnCtrl = Color(0xFFFFFFFF);
   Color btnWindows = Color(0xFFFFFFFF);
   Color btnSpace = Color(0xFFFFFFFF);
-  String cache = '';
-  double _progressValue = 0.0;
-
-  void _updateProgress() {
-    print(
-        "------------------------------Đã thêm chữ vào cache, cache hiện tại  = " +
-            cache +
-            ", _progressValue = " +
-            _progressValue.toString());
-    const oneSec = const Duration(seconds: 1);
-    new Timer.periodic(oneSec, (Timer t) {
-      setState(() {
-        _progressValue += 1.0 / 3;
-        // we "finish" downloading here
-        if (_progressValue.toStringAsFixed(1) == '1.0') {
-          _progressValue = 0.0;
-          if (cache != '') {
-            save_keyword_to_firestore.save_to_DB(cache);
-          }
-          cache = '';
-          t.cancel();
-          return;
-        }
-      });
-    });
-  }
-
   void add_text_to_cache(String text) {
-    _progressValue = 0.0;
-    cache += text;
-    _updateProgress();
+    save_keyword_to_firestore.save_to_dart(text);
+
   }
 
   void initState() {
@@ -1541,6 +1513,7 @@ class QwertyLeftKeyboard extends State<QwertyLeft> {
                         btnWindows = Color(0xFFFFFFFF);
                       });
                     });
+
                   });
                 },
                 child: Container(
