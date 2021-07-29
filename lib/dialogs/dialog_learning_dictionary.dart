@@ -1,4 +1,6 @@
 import 'dart:ffi';
+import 'package:datk/Screens/delete_word_warning.dart';
+import 'package:datk/Screens/dictionary_management.dart';
 import 'package:datk/dialogs/dialog_learning_dictionary.dart';
 import 'package:datk/dialogs/dialog_typing_state_information.dart';
 
@@ -38,6 +40,7 @@ class DialogTraTuDienState extends State<DialogTraTuDien> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           "Tra từ điển",
@@ -96,47 +99,116 @@ class DialogTraTuDienState extends State<DialogTraTuDien> {
                               fontWeight: FontWeight.bold)),
                       SizedBox(height: 10),
                       Table(
-                        // defaultColumnWidth: FixedColumnWidth(120.0),
-                        border: TableBorder.all(
-                            color: Color(0xFF1B950D),
-                            style: BorderStyle.solid,
-                            width: 1),
-                        children: [
-                          TableRow(children: [
-                            Column(children: [
-                              Text('Tốc ký',
-                                  style: TextStyle(
-                                      fontSize: 20.0, color: Color(0xFF0435D2)))
-                            ]),
-                            Column(children: [
-                              Text('Qwerty',
-                                  style: TextStyle(
-                                      fontSize: 20.0, color: Color(0xFF0435D2)))
-                            ]),
-                          ]),
-                          for (int i = 0; i < found; i++)
-                            TableRow(children: [
-                              Column(children: [
-                                Text(
-                                    snapshot.data.docs[i].id.toString(),
-                                    style: TextStyle(
-                                        color: Color(0xFFFF1919),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold))
-                              ]),
-                              Column(children: [
-                                Text(snapshot.data.docs[i]
-                                            .data()['value']
-                                            .toString(),
-                                    style: TextStyle(
-                                        color: Color(0xFFFF1919),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold))
-                              ]),
-                            ]),
-                        ],
-                      ),
+                              // defaultColumnWidth: FixedColumnWidth(120.0),
+                              border: TableBorder.all(
+                                  color: Color(0xFF1B950D),
+                                  style: BorderStyle.solid,
+                                  width: 1),
+                              children: [
+                                TableRow(children: [
+                                  Column(children: [
+                                    Text('Tốc ký',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Color(0xFF0435D2)))
+                                  ]),
+                                  Column(children: [
+                                    Text('Qwerty',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Color(0xFF0435D2)))
+                                  ]),
+                                ]),
+                                for (int i = 0; i < found; i++)
+                                  TableRow(children: [
+                                    Column(children: [
+                                      FlatButton(
+                                          onLongPress:(){
+                                            showDialog(
+                                                context: context, builder: (_) => DeleteWordWarning(steno: snapshot.data.docs[i].id.toString()));
+                                          },
+                                          onPressed: (){
+                                            Navigator.push(
+                                              //điều hướng sang màn hình mới (Màn hình HomeScreen)
+                                              context, //điều hướng từ
+                                              MaterialPageRoute(
+                                                //điều hướng sang
+                                                builder:
+                                                    (context) => //bên dưới cũng có hàm route sang HomeScreen, nhưng route ở đây là route khi kiểm tra ngay từ đầu, nếu đã đăng nhập lần trước rồi thì route ngay
+                                                DictionaryManagement(steno: snapshot.data.docs[i].id.toString(),qwerty: snapshot.data.docs[i]
+                                                    .data()['value']
+                                                    .toString()),
+                                              ), //chuyển sang màn hình gồm các người đang online
+                                            );
+                                          },
+                                          child: Text(snapshot.data.docs[i].id.toString(),
+                                              style: TextStyle(
+                                                  color: Color(0xFFFF1919),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold))
 
+                                      ),
+                                    ]),
+                                    Column(children: [
+                                      FlatButton(
+                                          onPressed: (){
+                                            Navigator.push(
+                                              //điều hướng sang màn hình mới (Màn hình HomeScreen)
+                                              context, //điều hướng từ
+                                              MaterialPageRoute(
+                                                //điều hướng sang
+                                                builder:
+                                                    (context) => //bên dưới cũng có hàm route sang HomeScreen, nhưng route ở đây là route khi kiểm tra ngay từ đầu, nếu đã đăng nhập lần trước rồi thì route ngay
+                                                DictionaryManagement(steno: snapshot.data.docs[i].id.toString(),qwerty: snapshot.data.docs[i]
+                                                    .data()['value']
+                                                    .toString()),
+                                              ), //chuyển sang màn hình gồm các người đang online
+                                            );
+                                          },
+                                          child:
+                                      Text(
+                                          snapshot.data.docs[i]
+                                              .data()['value']
+                                              .toString(),
+                                          style: TextStyle(
+                                              color: Color(0xFFFF1919),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold))
+
+                                      ),
+                                    ]),
+                                  ]),
+                              ],
+                            ),
+                      (found == 0)
+                          ?  Padding(
+                          padding: const EdgeInsets.all(30),
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.push(
+                                //điều hướng sang màn hình mới (Màn hình HomeScreen)
+                                context, //điều hướng từ
+                                MaterialPageRoute(
+                                  //điều hướng sang
+                                  builder:
+                                      (context) => //bên dưới cũng có hàm route sang HomeScreen, nhưng route ở đây là route khi kiểm tra ngay từ đầu, nếu đã đăng nhập lần trước rồi thì route ngay
+                                      DictionaryManagement(steno: myController.text.toString(),qwerty: ''),
+                                  ), //chuyển sang màn hình gồm các người đang online
+                                );
+                            },
+                            child: Text(
+                              'Thêm vào bộ từ điển',
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            color: Color(0xffdd4b39),
+                            highlightColor: Color(0xffff7f7f),
+                            splashColor: Colors.transparent,
+                            textColor: Colors.white,
+                            padding:
+                            EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0),
+                          )
+                      )
+                       : Container(),
                     ],
                   );
                 } else {

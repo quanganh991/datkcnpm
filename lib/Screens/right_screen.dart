@@ -61,17 +61,16 @@ class RightScreenState extends State<RightScreen> {
                 if (snapshot.hasData) {
                   for (int i = 0; i < snapshot.data.docs.length; i++) {
                     time.add(snapshot.data.docs[i].data()['time'].toString());
-                    steno.add(
-                        snapshot.data.docs[i].data()['content'].toString());
+                    steno.add(snapshot.data.docs[i].data()['content'].toString());
                   }
 
-                  if (configs.steno.contains(steno[0].toUpperCase())) {
-                    color.add(Color(0xFF00D202));
-                  } else {
-                    color.add(Colors.red);
-                  }
-                  for (int i = 1; i < snapshot.data.docs.length; i++) {
-                    color.add(Color(0xFF9A7878));
+
+                  for (int i = 0; i < snapshot.data.docs.length; i++) {
+                    if (configs.steno.contains(steno[i].toUpperCase())) {
+                      color.add(Color(0xFF00D202));
+                    } else {
+                      color.add(Colors.red);
+                    }
                   }
                   return Container(
                     height: MediaQuery.of(context).size.height * 0.27,
