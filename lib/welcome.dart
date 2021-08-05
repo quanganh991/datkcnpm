@@ -2,6 +2,7 @@ import 'package:datk/THIET_LAP/Huong_Dan.dart';
 import 'package:datk/THIET_LAP/Lich_Su.dart';
 import 'package:datk/THIET_LAP/Phan_Hoi.dart';
 import 'package:datk/THIET_LAP/Xep_Hang.dart';
+import 'package:datk/THI_DAU/loading_game_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -382,7 +383,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         context, //điều hướng từ
                         MaterialPageRoute(
                           //điều hướng sang
-                          builder: (context) => ThiDauSelection(),
+                          builder: (context) => LoadingGame(title: "Chiến thắng đại dịch Covid-19"),
                         ),
                       );
                     },

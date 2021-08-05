@@ -79,3 +79,7 @@ flutter:
     - lib/image/note_5.png
     - lib/image/redmi_7.png
     - lib/image/dictionary.xlsx
+    - lib/image/covid19_loading.jpg
+    - lib/image/game_selection_background.jpg
+    - lib/image/game_background_left.jpg
+    - lib/image/game_background_right.jpg

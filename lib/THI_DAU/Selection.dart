@@ -35,7 +35,7 @@ class ThiDauSelectionState extends State<ThiDauSelection> {
                 bottomLeft: Radius.circular(8.0),
                 bottomRight: Radius.circular(8.0),
               ),
-              child: Image.asset('lib/image/selection_background.JPG',
+              child: Image.asset('lib/image/game_selection_background.jpg',
                   // width: 300,
                   height: 150,
                   fit: BoxFit.fill),
@@ -44,7 +44,7 @@ class ThiDauSelectionState extends State<ThiDauSelection> {
           Column(
             children: <Widget>[
               //MediaQuery.of(context).size.width * 0.75
-              const SizedBox(height: 320.0),
+              const SizedBox(height: 420.0),
               // Image.asset("lib/image/steno_keyboard.jpg"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

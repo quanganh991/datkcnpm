@@ -36,7 +36,7 @@ class LeftScreenState extends State<LeftScreen> {
                           ),
                           Text(
                             "Nội dung cần gõ",
-                            style: TextStyle(color: Colors.green, fontSize: 20),
+                            style: TextStyle(color: Color(0xFF005E2D), fontSize: 20),
                           ),
                         ],
                       ),
@@ -70,10 +70,10 @@ class LeftScreenState extends State<LeftScreen> {
                 margin: const EdgeInsets.all(5.0),
                 padding: const EdgeInsets.symmetric(horizontal: 1.0),
                 decoration:
-                    BoxDecoration(border: Border.all(color: Colors.red)),
+                    BoxDecoration(border: Border.all(color: Color(0xFF849A00))),
                 child: Text(
                   tu_can_go,
-                  style: TextStyle(color: Colors.purple, fontSize: 20),
+                  style: TextStyle(color: Color(0xFF000000), fontSize: 20),
                 ),
               ),
             ],
@@ -94,7 +94,7 @@ class LeftScreenState extends State<LeftScreen> {
                           ),
                           Text(
                             "Kết quả đã gõ",
-                            style: TextStyle(color: Colors.green, fontSize: 20),
+                            style: TextStyle(color: Color(0xFF005E2D), fontSize: 20),
                           ),
                         ],
                       ),
@@ -112,7 +112,7 @@ class LeftScreenState extends State<LeftScreen> {
                 margin: const EdgeInsets.all(5.0),
                 padding: const EdgeInsets.symmetric(horizontal: 1.0),
                 decoration:
-                    BoxDecoration(border: Border.all(color: Colors.red)),
+                    BoxDecoration(border: Border.all(color: Color(0xFF849A00))),
                 child: StreamBuilder(
                     //realtime
                     stream: FirebaseFirestore.instance
@@ -145,7 +145,7 @@ class LeftScreenState extends State<LeftScreen> {
                                   'Bạn đã gõ sai, xin mời gõ lại',
                                   //trả về từ tiếng việt của từ gõ tốc ký tương ứng
                                   style: TextStyle(
-                                      color: Colors.purple, fontSize: 20),
+                                      color: Color(0xFF000000), fontSize: 20),
                                 );
                                 ;
                               } else {
@@ -153,7 +153,7 @@ class LeftScreenState extends State<LeftScreen> {
                                   mapping_word.data[begin].toString(),
                                   //trả về từ tiếng việt của từ gõ tốc ký tương ứng
                                   style: TextStyle(
-                                      color: Colors.purple, fontSize: 20),
+                                      color: Color(0xFF000000), fontSize: 20),
                                 );
                               }
                             });
