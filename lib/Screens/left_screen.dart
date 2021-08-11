@@ -143,7 +143,6 @@ class LeftScreenState extends State<LeftScreen> {
                                   !mapping_word.data.exists) {
                                 return Text(
                                   'Bạn đã gõ sai, xin mời gõ lại',
-                                  //trả về từ tiếng việt của từ gõ tốc ký tương ứng
                                   style: TextStyle(
                                       color: Color(0xFF000000), fontSize: 20),
                                 );
@@ -151,7 +150,6 @@ class LeftScreenState extends State<LeftScreen> {
                               } else {
                                 return Text(
                                   mapping_word.data[begin].toString(),
-                                  //trả về từ tiếng việt của từ gõ tốc ký tương ứng
                                   style: TextStyle(
                                       color: Color(0xFF000000), fontSize: 20),
                                 );
