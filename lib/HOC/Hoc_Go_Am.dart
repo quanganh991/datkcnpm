@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:datk/dialogs/dialog_hint_steno_word.dart';
 import 'package:datk/dialogs/dialog_learning_dictionary.dart';
 import 'package:datk/dialogs/dialog_typing_state_information.dart';
 

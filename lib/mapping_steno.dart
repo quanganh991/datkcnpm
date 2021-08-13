@@ -18,8 +18,9 @@ class mapping_steno{
       print(excel.tables[table]!.maxRows);  //6900
       for (var row in excel.tables[table]!.rows) {
         String begin = row[0].replaceAll('-','');
+        List<String> split_word = row[0].split('-');
         String end = row[1];
-        print("$row" +" "+ begin+" "+end);
+        print("$row" +" "+ begin+" "+end+" "+split_word[0]+" "+split_word[1]);
         //Ghi ra DB
         FirebaseFirestore.instance
             .collection('datk') //bảng user
@@ -28,7 +29,10 @@ class mapping_steno{
             .doc(begin)
             .set({
           begin: end,
-          'value': end
+          'key': begin,
+          'value': end,
+          'begin': split_word[0],
+          'end': split_word[1],
         });
       }
     }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:datk/dialogs/dialog_hint_steno_word.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
@@ -59,6 +60,16 @@ class LeftScreenState extends State<LeftScreen> {
                   ),
                 ),
                 color: Color(0xFFFFDADA),
+              ),
+              Center(
+                child: IconButton(
+                  icon: Icon(Icons.help_outline),
+                  onPressed: () => {
+                    showDialog(
+                        context: context, builder: (_) => HintStenoWordDialog(qwerty_word: tu_can_go))
+                  },
+                  color: Colors.grey,
+                ),
               ),
             ],
           ),
@@ -148,6 +159,9 @@ class LeftScreenState extends State<LeftScreen> {
                                 );
                                 ;
                               } else {
+
+
+
                                 return Text(
                                   mapping_word.data[begin].toString(),
                                   style: TextStyle(
