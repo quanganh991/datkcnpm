@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datk/dialogs/dialog_hint_steno_word.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +13,28 @@ class LeftScreen extends StatefulWidget {
 }
 
 class LeftScreenState extends State<LeftScreen> {
-  String tu_can_go = configs.random_words();
+  // var tu_can_go = configs.random_words();
+  var tu_can_go = FirebaseFirestore.instance
+      .collection('datk') //from messages
+      .doc('typing_dart')
+      .collection('question_banking')
+      .snapshots();
+
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('datk') //bảng user
+        .doc('typing_dart') //tại id mới
+        .collection('typing_dart')
+        .doc('typing_index')
+        .set({
+      'content': 'not_allowed',
+      'time': 'not_allowed',
+      'typing_index': 0
+    });
+  }
+
+  String TuCanGo = '';
 
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -37,7 +60,8 @@ class LeftScreenState extends State<LeftScreen> {
                           ),
                           Text(
                             "Nội dung cần gõ",
-                            style: TextStyle(color: Color(0xFF005E2D), fontSize: 20),
+                            style: TextStyle(
+                                color: Color(0xFF005E2D), fontSize: 20),
                           ),
                         ],
                       ),
@@ -53,7 +77,12 @@ class LeftScreenState extends State<LeftScreen> {
                     icon: Icon(Icons.play_arrow),
                     onPressed: () => {
                       setState(() {
-                        tu_can_go = configs.random_words();
+                        // tu_can_go = configs.random_words();
+                        tu_can_go = FirebaseFirestore.instance
+                            .collection('datk') //from messages
+                            .doc('typing_dart')
+                            .collection('question_banking')
+                            .snapshots(); //lấy ra tất cả các từ cần gõ
                       })
                     },
                     color: Colors.grey,
@@ -66,7 +95,9 @@ class LeftScreenState extends State<LeftScreen> {
                   icon: Icon(Icons.help_outline),
                   onPressed: () => {
                     showDialog(
-                        context: context, builder: (_) => HintStenoWordDialog(qwerty_word: tu_can_go))
+                        context: context,
+                        builder: (_) =>
+                            HintStenoWordDialog(qwerty_word: TuCanGo))
                   },
                   color: Colors.grey,
                 ),
@@ -76,17 +107,84 @@ class LeftScreenState extends State<LeftScreen> {
           Row(
             children: [
               Container(
-                height: 100.0,
-                width: MediaQuery.of(context).size.width * 0.95,
-                margin: const EdgeInsets.all(5.0),
-                padding: const EdgeInsets.symmetric(horizontal: 1.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Color(0xFF849A00))),
-                child: Text(
-                  tu_can_go,
-                  style: TextStyle(color: Color(0xFF000000), fontSize: 20),
-                ),
-              ),
+                  height: 100.0,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  margin: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Color(0xFF849A00))),
+                  child: StreamBuilder(
+                      stream: tu_can_go,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          int word_index =
+                              Random().nextInt(snapshot.data.docs.length);
+                          TuCanGo = snapshot.data.docs[word_index]
+                              .data()['sentences']
+                              .toString();
+
+                          FirebaseFirestore.instance
+                              .collection('datk') //bảng user
+                              .doc('typing_dart') //tại id mới
+                              .collection('typing_dart')
+                              .doc('typing_index')
+                              .set({
+                            'content': 'not_allowed',
+                            'time': 'not_allowed',
+                            'typing_index': 0
+                          });
+                          return Container(
+                            child: StreamBuilder(
+                                //realtime
+                                stream: FirebaseFirestore.instance
+                                    .collection('datk') //truy vấn bảng messages
+                                    .doc('typing_dart') //where
+                                    .collection('typing_dart')
+                                    .doc('typing_index')
+                                    .snapshots(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot cursor) {
+                                  if (cursor.hasData) {
+                                    List<String> word_ind = snapshot.data.docs[word_index]
+                                        .data()['sentences']
+                                        .toString().split(' ');
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      //Center Row contents horizontally,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      //Center Row contents vertically,
+                                      children: [
+                                        for(int i=0;i<word_ind.length;i++)
+
+                                          Text(
+                                          word_ind[i].toString()+' ',
+                                          style: TextStyle(
+                                              color:
+                                              i<=int.parse(cursor.data['typing_index'].toString())
+                                              ?
+                                              Color(
+                                                  0xFF0DA509
+                                              )
+                                              :
+                                                  Color(
+                                                    0xFF000000
+                                                  )
+                                              ,
+                                              fontSize: 20),
+                                          ),
+                                      ],
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                }),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      })),
             ],
           ),
           Row(
@@ -105,7 +203,8 @@ class LeftScreenState extends State<LeftScreen> {
                           ),
                           Text(
                             "Kết quả đã gõ",
-                            style: TextStyle(color: Color(0xFF005E2D), fontSize: 20),
+                            style: TextStyle(
+                                color: Color(0xFF005E2D), fontSize: 20),
                           ),
                         ],
                       ),
@@ -157,11 +256,7 @@ class LeftScreenState extends State<LeftScreen> {
                                   style: TextStyle(
                                       color: Color(0xFF000000), fontSize: 20),
                                 );
-                                ;
                               } else {
-
-
-
                                 return Text(
                                   mapping_word.data[begin].toString(),
                                   style: TextStyle(

@@ -20,6 +20,7 @@ class HintStenoWordDialogState extends State<HintStenoWordDialog> {
   @override
   Widget build(BuildContext context) {
     String qwerty = widget.qwerty_word;
+    print("truyền sang gợi ý = "+qwerty);
     //tách câu thành các từ đơn lẻ
     List<String> split_qwerty = qwerty.split(" ");
 
@@ -46,6 +47,18 @@ class HintStenoWordDialogState extends State<HintStenoWordDialog> {
             else {
               String hint = "";
               for (int i = 0;i<snapshot.data.docs.length;i++){
+
+                FirebaseFirestore.instance
+                    .collection('datk') //bảng user
+                    .doc('typing_dart') //tại id mới
+                    .collection('answer_key')
+                    .doc(i.toString())
+                    .set({
+                  i.toString():snapshot.data.docs[i]
+                      .data()['key']
+                      .toString()
+                });
+
                 hint+=snapshot.data.docs[i]
                     .data()['key']
                     .toString()+"\n";

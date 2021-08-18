@@ -176,7 +176,6 @@ class DictionaryManagementState extends State<DictionaryManagement> {
           begin_or_end == "end"
           ?
           StreamBuilder(
-              //realtime
               stream: end_affected_steno_words,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {

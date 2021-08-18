@@ -47,7 +47,23 @@ class save_keyword_to_firestore{
     }
     //kiểm tra xong
 
-    //3. thêm vào DB chính thức
+    //3. Kiểm tra từ đó đúng hay sai
+    final QuerySnapshot get_all_answerkey = await FirebaseFirestore.instance
+        .collection('datk') //bảng user
+        .doc('typing_dart') //tại id mới
+        .collection('answer_key')
+        .get();
+    final List<DocumentSnapshot> answer_key = get_all_answerkey.docs;
+    List<String> all_answer_key = [];
+    if (answer_key.length > 0) { //nếu trong nháp có thông tin thì lưu chúng vào DB chính thức
+      for (int i=0;i<answer_key.length;i++){
+        all_answer_key.add(answer_key[i][i.toString()]);
+        print("Tất cả đáp án đã lấy được là: "+all_answer_key[i]);
+      }
+    }
+    //Kiểm tra từ đó đúng hay sai đã xong
+
+    //4. thêm vào DB chính thức
     if (s!='') {
       //từ đó là tốc ký thì mới thêm
       if(all_valid_steno.length > 0) {
@@ -69,11 +85,42 @@ class save_keyword_to_firestore{
             documentReference,
             {
               'content': s,
-              'time': formattedDate.toString()
+              'time': formattedDate.toString(),
+              'color': all_answer_key.contains(s.toUpperCase()) == true ? 'green' : 'red',
             },
           );
         });
+
         //thêm xong vào DB chính thức
+        if (all_answer_key.contains(s.toUpperCase()) == true){
+          //di chuyển con trỏ
+          final QuerySnapshot current_cursor = await FirebaseFirestore.instance
+              .collection('datk') //from messages
+              .doc('typing_dart')
+              .collection('typing_dart')
+              .where('time',isEqualTo: 'not_allowed')
+              .get();
+          final List<DocumentSnapshot> get_current_cursor = current_cursor.docs;
+          int cursor = int.parse(get_current_cursor[0]['typing_index'].toString());
+          var moving_cursor = FirebaseFirestore
+              .instance //truy vấn 'messages' theo id
+              .collection('datk') //from messages
+              .doc('typing_dart')
+              .collection('typing_dart')
+              .doc('typing_index');
+          FirebaseFirestore.instance.runTransaction((
+              transaction) async { //lưu vào database
+            transaction.set(
+              moving_cursor,
+              {
+                'time':'not_allowed',
+                'content':'not_allowed',
+                'typing_index': cursor+1
+              },
+            );
+          });
+          //di chuyển con trỏ xong
+        }
       }
       else {
         Fluttertoast.showToast(
@@ -89,7 +136,7 @@ class save_keyword_to_firestore{
 
 
 
-      //4. Xóa nháp
+      //5. Xóa nháp
       for (int i = 0; i < DART.length; i++) {
         FirebaseFirestore.instance //truy vấn 'messages' theo id
             .collection('datk') //from messages
