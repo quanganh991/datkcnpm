@@ -245,12 +245,12 @@ class LeftScreenState extends State<LeftScreen> {
                                 .collection('datk') //from messages
                                 .doc('dictionary')
                                 .collection('dictionary')
-                                .doc(begin) //tìm trong bộ từ điển
+                                .where('key',isEqualTo: begin.toUpperCase())
+                                .limit(1)
                                 .snapshots(),
                             builder: (BuildContext context,
                                 AsyncSnapshot mapping_word) {
-                              if (!mapping_word.hasData ||
-                                  !mapping_word.data.exists) {
+                              if (!mapping_word.hasData) {
                                 return Text(
                                   'Bạn đã gõ sai, xin mời gõ lại',
                                   style: TextStyle(
@@ -258,7 +258,7 @@ class LeftScreenState extends State<LeftScreen> {
                                 );
                               } else {
                                 return Text(
-                                  mapping_word.data[begin].toString(),
+                                  mapping_word.data.docs[0].data()[begin].toString(),
                                   style: TextStyle(
                                       color: Color(0xFF000000), fontSize: 20),
                                 );

@@ -61,7 +61,15 @@ class HintStenoWordDialogState extends State<HintStenoWordDialog> {
 
                 hint+=snapshot.data.docs[i]
                     .data()['key']
-                    .toString()+"\n";
+                    .toString()
+                    +
+                    " -> "
+                    +
+                    snapshot.data.docs[i]
+                        .data()['value']
+                        .toString()
+                    +
+                    "\n";
               }
               return Text(hint,style: TextStyle(
                   color: Color(0xFFFF1919),

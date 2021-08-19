@@ -26,7 +26,7 @@ class mapping_steno{
             .collection('datk') //bảng user
             .doc('dictionary') //tại id mới
             .collection('dictionary')
-            .doc(begin)
+            .doc(row[0].toString())
             .set({
           begin: end,
           'key': begin,
