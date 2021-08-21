@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datk/welcome.dart';
+import 'package:device_info/device_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:datk/mapping_steno.dart';
+import 'package:datk/keyboard/get_device_info.dart';
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key, required this.title}) : super(key: key);
 
@@ -25,7 +26,7 @@ class LoginScreenState extends State<LoginScreen> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   late SharedPreferences prefs;
-
+  String device_user = '';
   bool isLoading = false;
   bool isLoggedIn = false;
   late User currentUser;
@@ -47,11 +48,13 @@ class LoginScreenState extends State<LoginScreen> {
       isLoading = true; //xoay vòng
     });
 
+    device_user = await get_device_info.device_info();
+
     prefs =
         await SharedPreferences.getInstance(); //moi các trường trong firebase
     print("prefs đăng xuất = " + prefs.toString());
 
-    // await googleSignIn.signOut();
+    await googleSignIn.signOut();
     isLoggedIn = await googleSignIn.isSignedIn();
     print("isLoggedIn = " + isLoggedIn.toString());
     if (isLoggedIn) {
@@ -78,8 +81,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   Future<Null> handleSignIn() async {
-    prefs = await SharedPreferences
-        .getInstance(); //Instance of 'SharedPreferences', xuất hiện khi người dùng ấn nút đăng nhập
+    prefs = await SharedPreferences.getInstance(); //Instance of 'SharedPreferences', xuất hiện khi người dùng ấn nút đăng nhập
 
     this.setState(() {
       isLoading = true;
@@ -94,11 +96,9 @@ class LoginScreenState extends State<LoginScreen> {
       idToken: googleAuth.idToken,
     );
 
-    User? firebaseUser = (await firebaseAuth.signInWithCredential(credential))
-        .user; //lấy thông tin của người đăng nhập
+    User? firebaseUser = (await firebaseAuth.signInWithCredential(credential)).user; //lấy thông tin của người đăng nhập
 
-    print("kiểm tra firebaseUser có null ko, firebaseUser = " +
-        firebaseUser.toString());
+    print("kiểm tra firebaseUser có null ko, firebaseUser = " + firebaseUser.toString());
     if (firebaseUser != null) {
       //nếu tìm thấy tài khoản google của người này trong firebase
       // Check is already sign up
@@ -129,8 +129,27 @@ class LoginScreenState extends State<LoginScreen> {
           'photoUrl': firebaseUser.photoURL,
           'id': firebaseUser.uid,
           'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-          'chattingWith': null
-          ////người mà tôi đang chat ban đầu khi mới đăng nhập là null
+          'chattingWith': null,
+          //nếu máy 1 = null, chỉ gán máy 1
+          //nếu máy 1 khác null, thay thế máy 2
+          //nếu cả 2 máy khác null, thay thế máy 1
+          //Vì đăng nhập lần đầu nên chỉ cần gán máy 1 thôi
+          'id_device1': device_user,
+          'id_device2': null,
+        });
+
+        FirebaseFirestore.instance
+            .collection('users') //bảng user
+            .doc(firebaseUser.uid) //tại id mới
+            .set({
+          //set các thuộc tính cho người dùng mới
+          'nickname': firebaseUser.displayName,
+          'photoUrl': firebaseUser.photoURL,
+          'id': firebaseUser.uid,
+          'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+          'chattingWith': null,
+          'id_device1': device_user,
+          'id_device2': null,
         });
 
         // Write data to local
@@ -141,6 +160,30 @@ class LoginScreenState extends State<LoginScreen> {
         await prefs.setString('photoUrl', currentUser.photoURL.toString());
       } else {
         print("----------------------Đã đăng nhập trước đây rồi");
+
+        String phone1 = documents[0]['id_device1']; //vì đã từng đăng nhập 1 lần trước đây rồi nên chắc chắn máy 1 khác null
+        String phone2 = documents[0]['id_device2'];
+        //nếu máy 2 bằng null, gán máy 2
+        //nếu máy 2 khác null, máy 2 trở thành máy 1 và máy 1 được thay mới
+        //nếu máy mới khác cả 2 máy đầu thì mới cho thay thế
+        if (phone2.toString() == 'null' && phone1 != device_user) {
+          FirebaseFirestore.instance
+              .collection('users') //bảng user
+              .doc(firebaseUser.uid) //tại id mới
+              .update({
+            'id_device2': device_user,
+          });
+        }
+        else if (phone2.toString() != 'null' && device_user != phone2 && device_user != phone1){
+          FirebaseFirestore.instance
+              .collection('users') //bảng user
+              .doc(firebaseUser.uid) //tại id mới
+              .update({
+            'id_device1': device_user,
+            'id_device2': phone1,
+          });
+        }
+
         //nếu người dùng đăng nhập lần hai trở đi, thì tức là đã có tên trong firestore rồi  //document[0] = Instance of 'QueryDocumentSnapshot'
         // Write data to local
         await prefs.setString('id', documents[0]['id']);
@@ -158,7 +201,6 @@ class LoginScreenState extends State<LoginScreen> {
       });
 
       Navigator.push(
-          //điều hướng sang màn hình mới (Màn hình HomeScreen)
           context,
           MaterialPageRoute(
               //bên trên cũng có hàm route sang HomeScreen, nhưng route ở dưới đây là route khi ấn nút sign-in, chứ ko phải thực hiện ngay khi mở app lần đầu

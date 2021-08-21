@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:datk/Screens/body_screen.dart';
 import 'package:datk/dialogs/dialog_typing_state_information.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -133,121 +134,50 @@ class ThiDauRoomState extends State<ThiDauRoom> {
                             }),
                       ),
                       Center(
-                        child: StreamBuilder(
-                            //realtime
-                            stream: FirebaseFirestore.instance
-                                .collection('datk') //truy vấn bảng messages
-                                .doc('state') //where
-                                .collection('screen_state')
-                                .doc('Redmi 7')
-                                .snapshots(),
-                            builder:
-                                (BuildContext context, AsyncSnapshot snapshot) {
-                              if (snapshot.hasData) {
-                                return IconButton(
-                                  icon: Icon(Icons.screen_share_outlined),
-                                  onPressed: () => {
-                                    switch_screen.screen_switch(
-                                        (snapshot.data['screen_state'] ==
-                                                'right')
-                                            ? 'left'
-                                            : 'right'),
-                                  },
-                                  color: Colors.grey,
-                                );
-                              } else {
-                                return Container();
-                              }
-                            }),
+                        child: FutureBuilder(
+                          future: get_device_info.device_info(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot device_info) {
+                            if (device_info.hasData) {
+                              return StreamBuilder(
+                                  //realtime
+                                  stream: FirebaseFirestore.instance
+                                      .collection(
+                                          'datk') //truy vấn bảng messages
+                                      .doc('state') //where
+                                      .collection('screen_state')
+                                      .doc(device_info.data)
+                                      .snapshots(),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot snapshot) {
+                                    if (snapshot.hasData) {
+                                      return IconButton(
+                                        icon: Icon(Icons.screen_share_outlined),
+                                        onPressed: () => {
+                                          switch_screen.screen_switch(
+                                              (snapshot.data['screen_state'] ==
+                                                      'right')
+                                                  ? 'left'
+                                                  : 'right'),
+                                        },
+                                        color: Colors.grey,
+                                      );
+                                    } else {
+                                      return Container();
+                                    }
+                                  });
+                              ;
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-              FutureBuilder(
-                  future: get_device_info.device_info(),
-                  builder: (BuildContext context, AsyncSnapshot smartphone) {
-                    if (smartphone.hasData) {
-                      String model = smartphone.data;
-                      return StreamBuilder(
-                          stream: FirebaseFirestore.instance
-                              .collection('datk') //truy vấn bảng messages
-                              .doc('state') //where
-                              .collection('screen_state')
-                              .doc(model)
-                              .snapshots(),
-                          builder: (BuildContext context,
-                              AsyncSnapshot smartphone_firestore) {
-                            if (smartphone_firestore.hasData) {
-                              String screen = smartphone_firestore
-                                  .data['screen_state']
-                                  .toString();
-                              return screen == 'left'
-                                  ? Column(
-                                      children: [
-                                        LeftScreen(),
-                                        StreamBuilder(
-                                            //realtime
-                                            stream: FirebaseFirestore.instance
-                                                .collection(
-                                                    'datk') //truy vấn bảng messages
-                                                .doc('state') //where
-                                                .collection('keyboard_state')
-                                                .doc('keyboard_state')
-                                                .snapshots(),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot snapshot) {
-                                              if (snapshot.hasData) {
-                                                return (snapshot.data[
-                                                            'keyboard_state'] ==
-                                                        'qwerty')
-                                                    ? QwertyLeft()
-                                                    : StenoLeft();
-                                              } else {
-                                                return Container();
-                                              }
-                                            }),
-                                      ],
-                                    )
-                                  : Column(
-                                      children: [
-                                        // RightScreen(),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.75),
-                                        StreamBuilder(
-                                            //realtime
-                                            stream: FirebaseFirestore.instance
-                                                .collection(
-                                                    'datk') //truy vấn bảng messages
-                                                .doc('state') //where
-                                                .collection('keyboard_state')
-                                                .doc('keyboard_state')
-                                                .snapshots(),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot snapshot) {
-                                              if (snapshot.hasData) {
-                                                return (snapshot.data[
-                                                            'keyboard_state'] ==
-                                                        'qwerty')
-                                                    ? QwertyRight()
-                                                    : StenoRight();
-                                              } else {
-                                                return Container();
-                                              }
-                                            }),
-                                      ],
-                                    );
-                            } else {
-                              return Container();
-                            }
-                          });
-                    } else {
-                      return Container();
-                    }
-                  }),
+              BodyScreen(),
             ],
           ),
         ],

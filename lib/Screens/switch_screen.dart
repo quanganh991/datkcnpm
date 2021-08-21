@@ -1,54 +1,59 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:datk/keyboard/get_device_info.dart';
 import 'package:intl/intl.dart';
 
 class switch_screen{
   @override
-  static void screen_switch(String screen_state){
-    if (screen_state == 'left') {
-      FirebaseFirestore.instance
-          .collection('datk') //bảng user
-          .doc('state') //tại id mới
-          .collection('screen_state')
-          .doc('Redmi 7')
-          .set({
-        //set các thuộc tính cho người dùng mới
-        'screen_state': 'left',
-        ////người mà tôi đang chat ban đầu khi mới đăng nhập là null
-      });
+  static void screen_switch(String screen_state) async{
 
-      FirebaseFirestore.instance
+    String myphone = await get_device_info.device_info();
+    String phone1 = await get_device_info.user_phone_1(); //phone hiện tại
+    String phone2 = await get_device_info.user_phone_2(); //phone partner
+
+    if (myphone == phone2){
+      String tmp = phone2;
+      phone2 = phone1;
+      phone1 = tmp;
+    }
+    if (screen_state == 'left') {
+      if (phone1 != null) {
+        FirebaseFirestore.instance
+            .collection('datk') //bảng user
+            .doc('state') //tại id mới
+            .collection('screen_state')
+            .doc(phone1)
+            .set({
+          'screen_state': 'left',
+        });
+      }
+
+      if (phone2 != null) {FirebaseFirestore.instance
           .collection('datk') //bảng user
           .doc('state') //tại id mới
           .collection('screen_state')
-          .doc('SAMSUNG-SM-N920A')
+          .doc(phone2)
           .set({
-        //set các thuộc tính cho người dùng mới
         'screen_state': 'right',
-        ////người mà tôi đang chat ban đầu khi mới đăng nhập là null
-      });
+      });}
     }
     else if (screen_state == 'right') {
-      FirebaseFirestore.instance
+      if (phone1 != null) {FirebaseFirestore.instance
           .collection('datk') //bảng user
           .doc('state') //tại id mới
           .collection('screen_state')
-          .doc('Redmi 7')
+          .doc(phone1)
           .set({
-        //set các thuộc tính cho người dùng mới
         'screen_state': 'right',
-        ////người mà tôi đang chat ban đầu khi mới đăng nhập là null
-      });
+      });}
 
-      FirebaseFirestore.instance
+      if (phone2 != null) {FirebaseFirestore.instance
           .collection('datk') //bảng user
           .doc('state') //tại id mới
           .collection('screen_state')
-          .doc('SAMSUNG-SM-N920A')
+          .doc(phone2)
           .set({
-        //set các thuộc tính cho người dùng mới
         'screen_state': 'left',
-        ////người mà tôi đang chat ban đầu khi mới đăng nhập là null
-      });
+      });}
     }
   }
 }

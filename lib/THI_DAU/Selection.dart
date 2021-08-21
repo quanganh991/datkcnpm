@@ -6,6 +6,7 @@ import 'package:datk/THI_DAU/Thi_Dau.dart';
 import 'package:datk/dialogs/dialog_Hoc_Go_Am.dart';
 import 'package:flutter/material.dart';
 import 'package:datk/HOC/Hoc_Go_Phim.dart';
+import 'package:datk/keyboard/get_device_info.dart';
 
 class ThiDauSelection extends StatefulWidget {
   @override
@@ -63,38 +64,48 @@ class ThiDauSelectionState extends State<ThiDauSelection> {
                         //   ),
                         // );
                       },
-                      child: StreamBuilder(
-                          //realtime
-                          stream: FirebaseFirestore.instance
-                              .collection('users') //truy vấn bảng messages
-                              .doc('DYzVAdb0NCS4KWgXWPicqorhyzL2') //where
-                              .snapshots(),
-                          builder:
-                              (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData) {
-                              return Column(
-                                children: <Widget>[
-                                  CachedNetworkImage(
-                                    // width: 300,
-                                    height: 50,
-                                    fit: BoxFit.fill,
-                                    imageUrl:
-                                        snapshot.data['photoUrl'].toString(),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    snapshot.data['nickname'],
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 20),
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return Container();
-                            }
-                          }),
+                      child: FutureBuilder(
+                        future: get_device_info.user_id(),
+                        builder: (BuildContext context, AsyncSnapshot my_info) {
+                          if (my_info.hasData) {
+                            return StreamBuilder(
+                                //realtime
+                                stream: FirebaseFirestore.instance
+                                    .collection(
+                                        'users') //truy vấn bảng messages
+                                    .doc(my_info.data.toString()) //where
+                                    .snapshots(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Column(
+                                      children: <Widget>[
+                                        CachedNetworkImage(
+                                          // width: 300,
+                                          height: 50,
+                                          fit: BoxFit.fill,
+                                          imageUrl: snapshot.data['photoUrl']
+                                              .toString(),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          snapshot.data['nickname'],
+                                          style: TextStyle(
+                                              color: Colors.blue, fontSize: 20),
+                                        ),
+                                      ],
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                });
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
                     ),
                   ),
                   Container(
@@ -103,8 +114,7 @@ class ThiDauSelectionState extends State<ThiDauSelection> {
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.red)),
                     child: FlatButton(
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                       child: StreamBuilder(
                           //realtime
                           stream: FirebaseFirestore.instance
@@ -120,8 +130,7 @@ class ThiDauSelectionState extends State<ThiDauSelection> {
                                     // width: 300,
                                     height: 50,
                                     fit: BoxFit.fill,
-                                    imageUrl:
-                                    snapshot.data['photoUrl'],
+                                    imageUrl: snapshot.data['photoUrl'],
                                   ),
                                   Text(
                                     snapshot.data['nickname'],
