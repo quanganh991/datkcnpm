@@ -47,7 +47,7 @@ class KTDoKhoSelectionState extends State<KTDoKhoSelection> {
 
 
       HeadBarKiemTra(type: 'kiem_tra_do_kho'),
-          BodyScreen()
+          BodyScreen(type: 'random')
 
         ],
       ),

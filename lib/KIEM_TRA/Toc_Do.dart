@@ -46,7 +46,7 @@ class KTTocDoSelectionState extends State<KTTocDoSelection> {
 
           HeadBarKiemTra(type: 'kiem_tra_toc_do'),
 
-          BodyScreen()
+          BodyScreen(type: 'random')
 
         ],
       ),

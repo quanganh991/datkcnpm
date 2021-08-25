@@ -22,6 +22,8 @@ import 'package:datk/keyboard/switch_keyboard.dart';
 import 'package:datk/Screens/switch_screen.dart';
 
 class BodyScreen extends StatefulWidget {
+  final String type;
+  BodyScreen({Key? key, required this.type}) : super(key: key);
   @override
   BodyScreenState createState() => BodyScreenState();
 }
@@ -32,7 +34,7 @@ class BodyScreenState extends State<BodyScreen> {
   }
 
   Widget build(BuildContext context) {
-    // _showDialog(context);
+    String type = widget.type;
     return FutureBuilder(
         future: get_device_info.device_info(),
         builder: (BuildContext context, AsyncSnapshot smartphone) {
@@ -51,7 +53,7 @@ class BodyScreenState extends State<BodyScreen> {
                     return screen == 'left' ?
                     Column(
                       children: [
-                        LeftScreen(),
+                        LeftScreen(type: type),
                         StreamBuilder(
                           //realtime
                             stream: FirebaseFirestore.instance

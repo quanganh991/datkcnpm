@@ -48,7 +48,7 @@ class HocGoPhimSelectionState extends State<HocGoPhimSelection> {
         children: <Widget>[
 
           HeadBarHoc(type: 'hoc_go_phim'),
-          BodyScreen(),
+          BodyScreen(type: 'phim'),
 
         ],
       ),

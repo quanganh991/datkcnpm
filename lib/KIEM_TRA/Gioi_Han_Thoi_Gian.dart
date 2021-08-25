@@ -48,7 +48,7 @@ class KTGioiHanThoiGianSelectionState extends State<KTGioiHanThoiGianSelection> 
 
           HeadBarKiemTra(type: 'kiem_tra_gioi_han_thoi_gian'),
 
-          BodyScreen()
+          BodyScreen(type: 'random')
 
         ],
       ),

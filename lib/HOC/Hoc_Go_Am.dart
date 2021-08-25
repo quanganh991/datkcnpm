@@ -45,7 +45,7 @@ class HocGoAmSelectionState extends State<HocGoAmSelection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           HeadBarHoc(type: 'hoc_go_am'),
-          BodyScreen()
+          BodyScreen(type: 'am')
         ],
       ),
     );

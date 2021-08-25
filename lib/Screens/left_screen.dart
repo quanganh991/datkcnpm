@@ -8,17 +8,34 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:datk/image/configs.dart';
 
 class LeftScreen extends StatefulWidget {
+  final String type;
+  LeftScreen({Key? key, required this.type}) : super(key: key);
   @override
   LeftScreenState createState() => LeftScreenState();
 }
 
 class LeftScreenState extends State<LeftScreen> {
   // var tu_can_go = configs.random_words();
-  var tu_can_go = FirebaseFirestore.instance
+  Stream<QuerySnapshot<Map<String, dynamic>>> query_question_banking(String type){
+    return
+      type == 'random'
+      ?
+      FirebaseFirestore.instance
       .collection('datk') //from messages
       .doc('typing_dart')
       .collection('question_banking')
-      .snapshots();
+      .snapshots()
+      :
+      FirebaseFirestore.instance
+          .collection('datk') //from messages
+          .doc('typing_dart')
+          .collection('question_banking')
+          .where('type', isEqualTo: type)
+          .snapshots()
+      ;
+  }
+
+  late Stream<QuerySnapshot<Map<String, dynamic>>> tu_can_go;
 
   void initState() {
     super.initState();
@@ -32,11 +49,15 @@ class LeftScreenState extends State<LeftScreen> {
       'time': 'not_allowed',
       'typing_index': 0
     });
+
+    tu_can_go = query_question_banking(widget.type);
+
   }
 
   String TuCanGo = '';
 
   Widget build(BuildContext context) {
+    String type = widget.type;
     return ConstrainedBox(
       constraints: BoxConstraints(
         // minHeight: 15.0,
@@ -77,12 +98,7 @@ class LeftScreenState extends State<LeftScreen> {
                     icon: Icon(Icons.play_arrow),
                     onPressed: () => {
                       setState(() {
-                        // tu_can_go = configs.random_words();
-                        tu_can_go = FirebaseFirestore.instance
-                            .collection('datk') //from messages
-                            .doc('typing_dart')
-                            .collection('question_banking')
-                            .snapshots(); //lấy ra tất cả các từ cần gõ
+                        tu_can_go = query_question_banking(type);
                       })
                     },
                     color: Colors.grey,
@@ -162,15 +178,23 @@ class LeftScreenState extends State<LeftScreen> {
                                           word_ind[i].toString()+' ',
                                           style: TextStyle(
                                               color:
-                                              i<=int.parse(cursor.data['typing_index'].toString())
+                                              i<int.parse(cursor.data['typing_index'].toString())
                                               ?
                                               Color(
                                                   0xFF0DA509
                                               )
                                               :
+                                              (
+                                                  i == int.parse(cursor.data['typing_index'].toString())
+                                                  ?
                                                   Color(
-                                                    0xFF000000
+                                                      0xFFC97101
                                                   )
+                                                  :
+                                                  Color(
+                                                      0xFF000000
+                                                  )
+                                              )
                                               ,
                                               fontSize: 20),
                                           ),

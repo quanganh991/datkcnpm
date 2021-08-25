@@ -45,7 +45,7 @@ class HocGoTuDoSelectionState extends State<HocGoTuDoSelection> {
 
 
           HeadBarHoc(type: 'hoc_go_tu_do'),
-          BodyScreen()
+          BodyScreen(type: 'random')
 
         ],
       ),

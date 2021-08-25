@@ -44,7 +44,7 @@ class KTDoChinhXacSelectionState extends State<KTDoChinhXacSelection> {
 
 
           HeadBarKiemTra(type: 'kiem_tra_do_chinh_xac'),
-          BodyScreen()
+          BodyScreen(type: 'random')
 
         ],
       ),

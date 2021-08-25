@@ -177,7 +177,13 @@ class ThiDauRoomState extends State<ThiDauRoom> {
                   ),
                 ),
               ),
-              BodyScreen(),
+
+
+
+              BodyScreen(type: 'random'),
+
+
+
             ],
           ),
         ],

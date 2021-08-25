@@ -48,7 +48,7 @@ class KTVanBanTuNhapSelectionState extends State<KTVanBanTuNhapSelection> {
 
 
           HeadBarKiemTra(type: 'kiem_tra_van_ban_tu_nhap'),
-          BodyScreen()
+          BodyScreen(type: 'random')
 
         ],
       ),

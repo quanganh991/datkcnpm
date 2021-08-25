@@ -42,7 +42,7 @@ class HocGoCauSelectionState extends State<HocGoCauSelection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           HeadBarHoc(type: 'hoc_go_cau'),
-          BodyScreen()
+          BodyScreen(type: 'cau')
 
         ],
       ),

@@ -40,8 +40,7 @@ class HintStenoWordDialogState extends State<HintStenoWordDialog> {
               .where('value', whereIn: split_qwerty)
               .snapshots(), //lấy từ vừa gõ
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            print(snapshot.data.docs.length);
-            if (!snapshot.hasData || snapshot.hasError) {
+            if (!snapshot.hasData || snapshot.hasError || snapshot.data.docs.length < 1) {
               return Container();
             }
             else {
