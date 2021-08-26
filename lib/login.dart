@@ -11,6 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:datk/keyboard/get_device_info.dart';
+import 'package:datk/mapping_steno.dart';
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key, required this.title}) : super(key: key);
 
@@ -40,6 +41,9 @@ class LoginScreenState extends State<LoginScreen> {
     _updateProgress();
 
     // mapping_steno.qwerty_to_steno();
+    // mapping_steno.add_am_dau();
+    // mapping_steno.add_am_chinh();
+    // mapping_steno.add_am_cuoi();
   }
 
   void isSignedIn() async {
@@ -47,6 +51,14 @@ class LoginScreenState extends State<LoginScreen> {
     this.setState(() {
       isLoading = true; //xoay vòng
     });
+
+    // final tu_dien = await FirebaseFirestore.instance
+    //     .collection('datk') //bảng user
+    //     .doc('dictionary')
+    //     .collection('dictionary')
+    //     .get(); //tại id mới
+    // final List<DocumentSnapshot> bo_tu_dien = tu_dien.docs;
+    // print("Độ dài của bộ từ điển là "+bo_tu_dien.length.toString());
 
     device_user = await get_device_info.device_info();
 

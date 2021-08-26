@@ -248,50 +248,36 @@ class LeftScreenState extends State<LeftScreen> {
                 decoration:
                     BoxDecoration(border: Border.all(color: Color(0xFF849A00))),
                 child: StreamBuilder(
-                    //realtime
-                    stream: FirebaseFirestore.instance
-                        .collection('datk') //from messages
-                        .doc('user_typed_recently')
-                        .collection('hoc')
-                        .orderBy('time', descending: true)
-                        .limit(1)
-                        .snapshots(), //lấy từ vừa gõ
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        String begin = snapshot.data.docs[0]
-                            .data()['content']
-                            .toString()
-                            .toUpperCase(); //từ vừa gõ
-                        print('---------------begin == ' + begin);
-                        return StreamBuilder(
                             //realtime
                             stream: FirebaseFirestore.instance
                                 .collection('datk') //from messages
-                                .doc('dictionary')
-                                .collection('dictionary')
-                                .where('key',isEqualTo: begin.toUpperCase())
+                                .doc('user_typed_recently')
+                                .collection('hoc')
+                                .orderBy('time', descending: true)
                                 .limit(1)
                                 .snapshots(),
                             builder: (BuildContext context,
                                 AsyncSnapshot mapping_word) {
-                              if (!mapping_word.hasData) {
+                              if (mapping_word.hasData) {
+                                int color = 0;
+                                if (mapping_word.data.docs[0].data()['color'].toString() == "green"){
+                                  color = 0xFF05D205;
+                                } else if (mapping_word.data.docs[0].data()['color'].toString() == "red"){
+                                  color = 0xFFFF0000;
+                                } else if (mapping_word.data.docs[0].data()['color'].toString() == "yellow"){
+                                  color = 0xFFAEB100;
+                                }
                                 return Text(
-                                  'Bạn đã gõ sai, xin mời gõ lại',
+                                  mapping_word.data.docs[0].data()['meaning'].toString() + ( color != 0xFFAEB100 ? "" : " (Từ này không có nghĩa)"),
                                   style: TextStyle(
-                                      color: Color(0xFF000000), fontSize: 20),
+                                      color:
+                                      Color(color)
+                                      , fontSize: 20),
                                 );
                               } else {
-                                return Text(
-                                  mapping_word.data.docs[0].data()[begin].toString(),
-                                  style: TextStyle(
-                                      color: Color(0xFF000000), fontSize: 20),
-                                );
+                                return Container();
                               }
-                            });
-                      } else {
-                        return Container();
-                      }
-                    }),
+                            }),
               ),
             ],
           ),

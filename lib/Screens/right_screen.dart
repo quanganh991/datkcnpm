@@ -64,6 +64,8 @@ class RightScreenState extends State<RightScreen> {
                     steno.add(snapshot.data.docs[i].data()['content'].toString());
                     if (snapshot.data.docs[i].data()['color'].toString() == "green")
                       color.add(Color(0xFF05D205));
+                    else if (snapshot.data.docs[i].data()['color'].toString() == "yellow")
+                      color.add(Color(0xFFAEB100));
                     else
                       color.add(Color(0xFFFF0000));
                   }

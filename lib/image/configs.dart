@@ -28,4 +28,28 @@ class configs{
     final _random = new Random();
     return s[_random.nextInt(s.length)];
   }
+
+  static bool kiem_tra_xem_danh_van_duoc_hay_ko(String am_dau, String am_chinh, String am_cuoi) {
+    if(am_dau == "ngh"){
+      if (["i","e","ê"].contains(am_chinh.length > 0 ? am_chinh[0] : " ") == false){
+        return false;
+      }
+    }
+    if(am_dau == "ng"){
+      if (["i","e","ê"].contains(am_chinh.length > 0 ? am_chinh[0] : " ") == true){
+        return false;
+      }
+    }
+    if(am_dau == "c"){
+      if (['a','o','ô','ơ','u','ư'].contains(am_chinh.length > 0 ? am_chinh[0] : " ") == false){
+        return false;
+      }
+    }
+    if(am_dau == "k"){
+      if (['e','ê','y','i'].contains(am_chinh.length > 0 ? am_chinh[0] : " ") == false){
+        return false;
+      }
+    }
+    return true;
+  }
 }

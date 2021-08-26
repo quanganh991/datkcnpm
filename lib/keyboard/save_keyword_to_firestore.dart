@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trotter/trotter.dart';
+import 'package:datk/image/configs.dart';
 
 class save_keyword_to_firestore{
   @override
@@ -28,26 +29,118 @@ class save_keyword_to_firestore{
       }
     }
     s=s.toUpperCase();
-    print("-------------trong nháp có s = "+s);
     //lấy xong thông tin từ nháp
 
-    //2. kiểm tra xem nên lưu từ đó theo thứ tự như nào vào DB
-    final QuerySnapshot all_single_steno_letters = await FirebaseFirestore.instance //tìm trong bộ từ điển các từ mà có steno là hoán vị của s
+    //2. Kiểm tra xem từ vừa gõ có đánh vấn được hay không
+    //2.1. Lấy tất cả âm đầu, âm chính, âm cuối ra
+    final QuerySnapshot all_am_dau = await FirebaseFirestore.instance
+        .collection('datk')
+        .doc('dictionary')
+        .collection('am_dau')
+        .get();
+    final List<DocumentSnapshot> list_all_am_dau = all_am_dau.docs;
+    List<String> tat_ca_am_dau = [];
+    List<String> tat_ca_nghia_dau = [];
+    if (list_all_am_dau.length > 0) {
+      for (int i=0;i<list_all_am_dau.length;i++){
+        tat_ca_am_dau.add(list_all_am_dau[i]['steno'].toString().toLowerCase());  //chỉ lấy về chữ thường
+        tat_ca_nghia_dau.add(list_all_am_dau[i]['qwerty'].toString().toLowerCase());  //chỉ lấy về chữ thường
+      }
+    }
+    final QuerySnapshot all_am_chinh = await FirebaseFirestore.instance
+        .collection('datk')
+        .doc('dictionary')
+        .collection('am_chinh')
+        .get();
+    final List<DocumentSnapshot> list_all_am_chinh = all_am_chinh.docs;
+    List<String> tat_ca_am_chinh = [];
+    List<String> tat_ca_nghia_chinh = [];
+    if (list_all_am_chinh.length > 0) {
+      for (int i=0;i<list_all_am_chinh.length;i++){
+        tat_ca_am_chinh.add(list_all_am_chinh[i]['steno'].toString().toLowerCase());  //chỉ lấy về chữ thường
+        tat_ca_nghia_chinh.add(list_all_am_chinh[i]['qwerty'].toString().toLowerCase());  //chỉ lấy về chữ thường
+      }
+    }
+    final QuerySnapshot all_am_cuoi = await FirebaseFirestore.instance
+        .collection('datk')
+        .doc('dictionary')
+        .collection('am_cuoi')
+        .get();
+    final List<DocumentSnapshot> list_all_am_cuoi = all_am_cuoi.docs;
+    List<String> tat_ca_am_cuoi = [];
+    List<String> tat_ca_nghia_cuoi = [];
+
+    if (list_all_am_cuoi.length > 0) {
+      for (int i=0;i<list_all_am_cuoi.length;i++){
+        tat_ca_am_cuoi.add(list_all_am_cuoi[i]['steno'].toString().toLowerCase());  //chỉ lấy về chữ thường
+        tat_ca_nghia_cuoi.add(list_all_am_cuoi[i]['qwerty'].toString().toLowerCase());  //chỉ lấy về chữ thường
+      }
+    }
+    //2.2. 3 vòng lặp xác định cấu tạo của từ vừa gõ
+    bool danh_van_duoc = false;
+    String tu_danh_van = '';
+    outerloop:
+    for(int i=0;i<tat_ca_am_dau.length;i++){
+      for(int j=0;j<tat_ca_am_chinh.length;j++){
+        for(int k=0;k<tat_ca_am_cuoi.length;k++){
+          if (tat_ca_am_dau[i].toString() + tat_ca_am_chinh[j].toString() + tat_ca_am_cuoi[k].toString() == s.toLowerCase()){
+            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_dau[i], tat_ca_nghia_chinh[j], tat_ca_nghia_cuoi[k]);
+            if (danh_van_duoc == true){
+              tu_danh_van = tat_ca_nghia_dau[i] + tat_ca_nghia_chinh[j] + tat_ca_nghia_cuoi[k];
+            }
+            break outerloop;
+          } else if (tat_ca_am_chinh[j].toString() + tat_ca_am_cuoi[k].toString() == s.toLowerCase()){
+            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko('',tat_ca_nghia_chinh[j], tat_ca_nghia_cuoi[k]);
+            if (danh_van_duoc == true){
+              tu_danh_van =tat_ca_nghia_chinh[j] + tat_ca_nghia_cuoi[k];
+            }
+            break outerloop;
+          } else if (tat_ca_am_dau[i].toString() + tat_ca_am_cuoi[k].toString() == s.toLowerCase()){
+            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_dau[i],'' ,tat_ca_nghia_cuoi[k]);
+            if (danh_van_duoc == true){
+              tu_danh_van =tat_ca_nghia_dau[i] + tat_ca_nghia_cuoi[k];
+            }
+            break outerloop;
+          } else if (tat_ca_am_dau[i].toString() + tat_ca_am_chinh[j].toString() == s.toLowerCase()){
+            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_dau[i], tat_ca_nghia_chinh[j],'');
+            if (danh_van_duoc == true){
+              tu_danh_van =tat_ca_nghia_dau[i] + tat_ca_nghia_chinh[j];
+            }
+            break outerloop;
+          } else if (tat_ca_am_dau[i].toString() == s.toLowerCase()){
+            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_dau[i],'','');
+            if (danh_van_duoc == true){
+              tu_danh_van =tat_ca_nghia_dau[i];
+            }
+            break outerloop;
+          } else if (tat_ca_am_chinh[j].toString() == s.toLowerCase()){
+            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_chinh[j],'','');
+            if (danh_van_duoc == true){
+              tu_danh_van =tat_ca_nghia_chinh[j];
+            }
+            break outerloop;
+          } else if (tat_ca_am_cuoi[k].toString() == s.toLowerCase()){
+            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_cuoi[k],'','');
+            if (danh_van_duoc == true){
+              tu_danh_van =tat_ca_nghia_cuoi[k];
+            }
+            break outerloop;
+          }
+        }
+      }
+    }
+
+    //3. kiểm tra xem từ vừa gõ có phải là tốc ký ko
+    final QuerySnapshot all_single_steno_letters = await FirebaseFirestore.instance
         .collection('datk')
         .doc('dictionary')
         .collection('dictionary')
-        .where('key', isEqualTo: s)
+        .where('key', isEqualTo: s) //tìm trong bộ từ điển xem có từ tốc ký đó không
         .get();
     final List<DocumentSnapshot> all_valid_steno = all_single_steno_letters.docs;
-    print("Tìm đc "+all_valid_steno.length.toString()+" nhé");
-    if (all_valid_steno.length > 0) { //nếu trong nháp có thông tin thì lưu chúng vào DB chính thức
-      for (int i=0;i<all_valid_steno.length;i++){
-        print(all_valid_steno[i]['begin']+" "+all_valid_steno[i]['end']+" "+all_valid_steno[i]['value']);
-      }
-    }
-    //kiểm tra xong
+    // //kiểm tra xong
 
-    //3. Kiểm tra từ đó đúng hay sai
+    //4. Kiểm tra từ đó đúng hay sai
     final QuerySnapshot get_all_answerkey = await FirebaseFirestore.instance
         .collection('datk') //bảng user
         .doc('typing_dart') //tại id mới
@@ -58,15 +151,15 @@ class save_keyword_to_firestore{
     if (answer_key.length > 0) { //nếu trong nháp có thông tin thì lưu chúng vào DB chính thức
       for (int i=0;i<answer_key.length;i++){
         all_answer_key.add(answer_key[i][i.toString()]);
-        print("Tất cả đáp án đã lấy được là: "+all_answer_key[i]);
       }
     }
     //Kiểm tra từ đó đúng hay sai đã xong
 
-    //4. thêm vào DB chính thức
+    //5. thêm vào DB chính thức
     if (s!='') {
+      //từ đó đánh vần được thì mới thêm
       //từ đó là tốc ký thì mới thêm
-      if(all_valid_steno.length > 0) {
+      if(all_valid_steno.length > 0 || tu_danh_van != '') { //hoặc là đánh vần được, hoặc là xuất hiện trong bộ từ điển
         int timeInMillis = int.parse(DateTime
             .now()
             .millisecondsSinceEpoch
@@ -84,16 +177,28 @@ class save_keyword_to_firestore{
           transaction.set(
             documentReference,
             {
+              'meaning': tu_danh_van.toString(),
               'content': s,
               'time': formattedDate.toString(),
-              'color': all_answer_key.contains(s.toUpperCase()) == true ? 'green' : 'red',
+              'color': all_answer_key.contains(s.toUpperCase()) == true ? 'green' //có trong bộ đáp án thì màu xanh
+                  : //ko có trong bộ đáp án thì hoặc màu đỏ, hoặc màu vàng
+              (
+              //tu_danh_van == '' nếu từ đó hoặc là sai cú pháp, hoặc là không đánh vần được
+                  all_valid_steno.length == 0 //ko có trong bộ đáp án, ko có trong từ điển thì màu vàng
+              ?
+              'yellow'
+               :
+               'red'  //ko có trong bộ đáp án, nhưng có trong từ điển, thì màu đỏ
+              )
+              ,
             },
           );
         });
 
         //thêm xong vào DB chính thức
+
+        //di chuyển con trỏ nếu có trong bộ đáp án
         if (all_answer_key.contains(s.toUpperCase()) == true){
-          //di chuyển con trỏ
           final QuerySnapshot current_cursor = await FirebaseFirestore.instance
               .collection('datk') //from messages
               .doc('typing_dart')
@@ -136,7 +241,7 @@ class save_keyword_to_firestore{
 
 
 
-      //5. Xóa nháp
+      //6. Xóa nháp
       for (int i = 0; i < DART.length; i++) {
         FirebaseFirestore.instance //truy vấn 'messages' theo id
             .collection('datk') //from messages
