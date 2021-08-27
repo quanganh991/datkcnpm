@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datk/dialogs/dialog_hint_steno_word.dart';
+import 'package:VietStenoGame/dialogs/dialog_hint_steno_word.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:datk/image/configs.dart';
+import 'package:VietStenoGame/image/configs.dart';
 
 class LeftScreen extends StatefulWidget {
   final String type;
@@ -254,11 +254,12 @@ class LeftScreenState extends State<LeftScreen> {
                                 .doc('user_typed_recently')
                                 .collection('hoc')
                                 .orderBy('time', descending: true)
+                                .where('time', isNotEqualTo: "not_allowed")
                                 .limit(1)
                                 .snapshots(),
                             builder: (BuildContext context,
                                 AsyncSnapshot mapping_word) {
-                              if (mapping_word.hasData) {
+                              if (mapping_word.hasData && mapping_word.data.docs.length > 0) {
                                 int color = 0;
                                 if (mapping_word.data.docs[0].data()['color'].toString() == "green"){
                                   color = 0xFF05D205;

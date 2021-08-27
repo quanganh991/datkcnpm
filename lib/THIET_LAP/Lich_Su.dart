@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datk/keyboard/get_device_info.dart';
+import 'package:VietStenoGame/keyboard/get_device_info.dart';
 import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

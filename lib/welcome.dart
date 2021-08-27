@@ -1,19 +1,19 @@
-import 'package:datk/THIET_LAP/Huong_Dan.dart';
-import 'package:datk/THIET_LAP/Lich_Su.dart';
-import 'package:datk/THIET_LAP/Phan_Hoi.dart';
-import 'package:datk/THIET_LAP/Xep_Hang.dart';
-import 'package:datk/THI_DAU/loading_game_screen.dart';
+import 'package:VietStenoGame/THIET_LAP/Huong_Dan.dart';
+import 'package:VietStenoGame/THIET_LAP/Lich_Su.dart';
+import 'package:VietStenoGame/THIET_LAP/Phan_Hoi.dart';
+import 'package:VietStenoGame/THIET_LAP/Xep_Hang.dart';
+import 'package:VietStenoGame/THI_DAU/loading_game_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:datk/KIEM_TRA/Selection.dart';
+import 'package:VietStenoGame/KIEM_TRA/Selection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'HOC/Selection.dart';
 import 'THI_DAU/Selection.dart';
 import 'package:device_info/device_info.dart';
-import 'package:datk/keyboard/get_device_info.dart';
+import 'package:VietStenoGame/keyboard/get_device_info.dart';
 
 import 'dialogs/dialog_Partner_Management.dart';
 
@@ -63,17 +63,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Material(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 3.0),
-                      margin: EdgeInsets.symmetric(horizontal: 3.0),
+                      padding: EdgeInsets.symmetric(horizontal: 0.9),
+                      margin: EdgeInsets.symmetric(horizontal: 0.9),
                       child: Column(
                         children: [
                           IconButton(
+                            iconSize: 20,
                             icon: Icon(Icons.connect_without_contact),
                             onPressed: () {
                               showDialog(
                                 context: context,
                                 builder: (_) => FutureBuilder(
-                                    future: get_device_info.device_info(),
+                                    future: get_device_info.user_partner_phone(),
                                     builder: (BuildContext context,
                                         AsyncSnapshot smartphone) {
                                       if (smartphone.hasData) {
@@ -88,10 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             color: Color(0xFF00001E),
-                            padding: EdgeInsets.symmetric(horizontal: 3.0),
-                            margin: EdgeInsets.symmetric(horizontal: 3.0),
+                            padding: EdgeInsets.symmetric(horizontal: 0.9),
+                            margin: EdgeInsets.symmetric(horizontal: 0.9),
                             child: Text("Đối tác",
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
+                                style: TextStyle(color: Color(0xFFFFFFFF),fontSize: 12)),
                           ),
                         ],
                       ),
@@ -100,11 +101,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Material(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 3.0),
-                      margin: EdgeInsets.symmetric(horizontal: 3.0),
+                      padding: EdgeInsets.symmetric(horizontal: 0.9),
+                      margin: EdgeInsets.symmetric(horizontal: 0.9),
                       child: Column(
                         children: [
                           IconButton(
+                            iconSize: 20,
                             icon: Icon(Icons.bar_chart_outlined),
                             // onPressed: getSticker,
                             color: Color(0xFFFFFFFF),
@@ -121,10 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             color: Color(0xFF00001E),
-                            padding: EdgeInsets.symmetric(horizontal: 3.0),
-                            margin: EdgeInsets.symmetric(horizontal: 3.0),
+                            padding: EdgeInsets.symmetric(horizontal: 0.9),
+                            margin: EdgeInsets.symmetric(horizontal: 0.9),
                             child: Text("Xếp hạng",
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
+                                style: TextStyle(color: Color(0xFFFFFFFF),fontSize: 12)),
                           ),
                         ],
                       ),
@@ -133,11 +135,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Material(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 3.0),
-                      margin: EdgeInsets.symmetric(horizontal: 3.0),
+                      padding: EdgeInsets.symmetric(horizontal: 0.9),
+                      margin: EdgeInsets.symmetric(horizontal: 0.9),
                       child: Column(
                         children: [
                           IconButton(
+                            iconSize: 20,
                             icon: Icon(Icons.event_note_rounded),
                             // onPressed: getSticker,
                             color: Color(0xFFFFFFFF),
@@ -154,10 +157,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             color: Color(0xFF00001E),
-                            padding: EdgeInsets.symmetric(horizontal: 3.0),
-                            margin: EdgeInsets.symmetric(horizontal: 3.0),
+                            padding: EdgeInsets.symmetric(horizontal: 0.9),
+                            margin: EdgeInsets.symmetric(horizontal: 0.9),
                             child: Text("Lịch sử",
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
+                                style: TextStyle(color: Color(0xFFFFFFFF),fontSize: 12)),
                           ),
                         ],
                       ),
@@ -166,11 +169,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Material(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 3.0),
-                      margin: EdgeInsets.symmetric(horizontal: 3.0),
+                      padding: EdgeInsets.symmetric(horizontal: 0.9),
+                      margin: EdgeInsets.symmetric(horizontal: 0.9),
                       child: Column(
                         children: [
                           IconButton(
+                            iconSize: 20,
                             icon: Icon(Icons.comment_rounded),
                             onPressed: () => {
                               Navigator.push(
@@ -186,10 +190,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             color: Color(0xFF00001E),
-                            padding: EdgeInsets.symmetric(horizontal: 3.0),
-                            margin: EdgeInsets.symmetric(horizontal: 3.0),
+                            padding: EdgeInsets.symmetric(horizontal: 0.9),
+                            margin: EdgeInsets.symmetric(horizontal: 0.9),
                             child: Text("Phản hồi",
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
+                                style: TextStyle(color: Color(0xFFFFFFFF),fontSize: 12)),
                           ),
                         ],
                       ),
@@ -198,11 +202,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Material(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 3.0),
-                      margin: EdgeInsets.symmetric(horizontal: 3.0),
+                      padding: EdgeInsets.symmetric(horizontal: 0.9),
+                      margin: EdgeInsets.symmetric(horizontal: 0.9),
                       child: Column(
                         children: [
                           IconButton(
+                            iconSize: 20,
                             icon: Icon(Icons.wb_incandescent_rounded),
                             onPressed: () => {
                               Navigator.push(
@@ -218,10 +223,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             color: Color(0xFF00001E),
-                            padding: EdgeInsets.symmetric(horizontal: 3.0),
-                            margin: EdgeInsets.symmetric(horizontal: 3.0),
+                            padding: EdgeInsets.symmetric(horizontal: 0.9),
+                            margin: EdgeInsets.symmetric(horizontal: 0.9),
                             child: Text("Hướng dẫn",
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
+                                style: TextStyle(color: Color(0xFFFFFFFF),fontSize: 12)),
                           ),
                         ],
                       ),
@@ -230,11 +235,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Material(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 3.0),
-                      margin: EdgeInsets.symmetric(horizontal: 3.0),
+                      padding: EdgeInsets.symmetric(horizontal: 0.9),
+                      margin: EdgeInsets.symmetric(horizontal: 0.9),
                       child: Column(
                         children: [
                           IconButton(
+                            iconSize: 20,
                             icon: Icon(Icons.exit_to_app),
                             onPressed: () => {
                               GoogleSignIn().signOut(),
@@ -247,10 +253,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             color: Color(0xFF00001E),
-                            padding: EdgeInsets.symmetric(horizontal: 3.0),
-                            margin: EdgeInsets.symmetric(horizontal: 3.0),
+                            padding: EdgeInsets.symmetric(horizontal: 0.9),
+                            margin: EdgeInsets.symmetric(horizontal: 0.9),
                             child: Text("Đăng xuất",
-                                style: TextStyle(color: Color(0xFFFFFFFF))),
+                                style: TextStyle(color: Color(0xFFFFFFFF),fontSize: 12)),
                           ),
                         ],
                       ),
@@ -306,12 +312,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         Row(
                           children: [
                             SizedBox(
-                              width: 40,
+                              width: 15,
                             ),
                             Text(
                               "Học",
                               style:
-                                  TextStyle(color: Colors.blue, fontSize: 40),
+                                  TextStyle(color: Colors.blue, fontSize: 20),
                             ),
                           ],
                         ),
@@ -352,11 +358,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         Row(
                           children: [
                             SizedBox(
-                              width: 40,
+                              width: 15,
                             ),
                             Text(
                               "Kiểm Tra",
-                              style: TextStyle(color: Colors.red, fontSize: 40),
+                              style: TextStyle(color: Colors.red, fontSize: 20),
                             ),
                           ],
                         ),
@@ -396,12 +402,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         Row(
                           children: [
                             SizedBox(
-                              width: 40,
+                              width: 15,
                             ),
                             Text(
                               "Thi Đấu",
                               style: TextStyle(
-                                  color: Colors.deepOrangeAccent, fontSize: 40),
+                                  color: Colors.deepOrangeAccent, fontSize: 20),
                             ),
                           ],
                         ),

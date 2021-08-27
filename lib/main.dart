@@ -1,5 +1,5 @@
-import 'package:datk/login.dart';
-import 'package:datk/welcome.dart';
+import 'package:VietStenoGame/login.dart';
+import 'package:VietStenoGame/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 

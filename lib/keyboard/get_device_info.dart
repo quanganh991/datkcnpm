@@ -75,4 +75,29 @@ class get_device_info{
     final List<DocumentSnapshot> user_info = result.docs;
     return user_info[0]['id_device2'];
   }
+
+  static Future<String> user_partner_phone() async {
+    final String id_user = await FirebaseAuth.instance.currentUser!.uid;;
+
+
+    final QuerySnapshot result = await FirebaseFirestore
+        .instance //QuerySnapshot dùng để chứa kết quả lấy được từ server
+        .collection('users')
+        .where('id', isEqualTo: id_user)
+        .limit(1)
+        .get();
+    final List<DocumentSnapshot> user_info = result.docs;
+    if (user_info[0]['id_device1'].toString() == "null" || user_info[0]['id_device2'].toString() == "null")
+      return "Chưa kết nối";
+    else{
+      String my_phone = await device_info();
+      String phone1 = await user_phone_1();
+      String phone2 = await user_phone_2();
+      if (my_phone == phone1)
+        return phone2;
+      else if (my_phone == phone2)
+        return phone1;
+      else return "Chưa kết nối";
+    }
+  }
 }

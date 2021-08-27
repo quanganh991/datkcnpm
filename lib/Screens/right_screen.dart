@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:datk/image/configs.dart';
+import 'package:VietStenoGame/image/configs.dart';
 
 class RightScreen extends StatefulWidget {
   @override
@@ -33,11 +33,11 @@ class RightScreenState extends State<RightScreen> {
                       Text(
                         "Kết quả tốc ký",
                         style:
-                            TextStyle(color: Colors.deepOrange, fontSize: 20),
+                            TextStyle(color: Colors.deepOrange, fontSize: 14),
                       ),
                       Text(
                         "Lưu ý: Tắt phần mềm gõ tiếng Việt khi sử dụng gõ tốc ký",
-                        style: TextStyle(color: Colors.green, fontSize: 19),
+                        style: TextStyle(color: Colors.green, fontSize: 14),
                       ),
                     ],
                   ),
@@ -52,15 +52,18 @@ class RightScreenState extends State<RightScreen> {
                   .doc('user_typed_recently')
                   .collection('hoc')
                   .orderBy('time', descending: true)
+                  .where('time', isNotEqualTo: 'not_allowed')
                   .limit(10)
                   .snapshots(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 List<String> time = [];
                 List<String> steno = [];
+                List<String> qwerty = [];
                 List<Color> color = [];
                 if (snapshot.hasData) {
                   for (int i = 0; i < snapshot.data.docs.length; i++) {
                     time.add(snapshot.data.docs[i].data()['time'].toString());
+                    qwerty.add(snapshot.data.docs[i].data()['meaning'].toString());
                     steno.add(snapshot.data.docs[i].data()['content'].toString());
                     if (snapshot.data.docs[i].data()['color'].toString() == "green")
                       color.add(Color(0xFF05D205));
@@ -90,13 +93,13 @@ class RightScreenState extends State<RightScreen> {
                                 Column(children: [
                                   Text('Thời gian',
                                       style: TextStyle(
-                                          fontSize: 20.0,
+                                          fontSize: 15.0,
                                           color: Color(0xFF0435D2)))
                                 ]),
                                 Column(children: [
                                   Text('Từ đã gõ',
                                       style: TextStyle(
-                                          fontSize: 20.0,
+                                          fontSize: 15.0,
                                           color: Color(0xFF0435D2)))
                                 ]),
                               ]),
@@ -110,16 +113,16 @@ class RightScreenState extends State<RightScreen> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: color[i],
-                                          fontSize: 20),
+                                          fontSize: 14),
                                     ),
                                   ]),
                                   Column(children: [
                                     Text(
-                                      steno[i],
+                                      steno[i] +" ---> "+ qwerty[i],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: color[i],
-                                          fontSize: 20),
+                                          fontSize: 14),
                                     ),
                                   ]),
                                 ]),

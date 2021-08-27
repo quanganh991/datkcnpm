@@ -1,6 +1,6 @@
-import 'package:datk/KIEM_TRA/Do_Chinh_Xac.dart';
-import 'package:datk/KIEM_TRA/Toc_Do.dart';
-import 'package:datk/KIEM_TRA/Van_Ban_Tu_Nhap.dart';
+import 'package:VietStenoGame/KIEM_TRA/Do_Chinh_Xac.dart';
+import 'package:VietStenoGame/KIEM_TRA/Toc_Do.dart';
+import 'package:VietStenoGame/KIEM_TRA/Van_Ban_Tu_Nhap.dart';
 import 'package:flutter/material.dart';
 
 import 'Do_Kho.dart';
@@ -66,17 +66,17 @@ class KiemtraSelectionState extends State<KiemtraSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/kiem_tra_do_chinh_xac.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Độ chính xác",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -102,17 +102,17 @@ class KiemtraSelectionState extends State<KiemtraSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/kiem_tra_do_kho.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Độ khó",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -147,17 +147,17 @@ class KiemtraSelectionState extends State<KiemtraSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/kiem_tra_gioi_han_thoi_gian.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Giới hạn thời gian",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -183,17 +183,17 @@ class KiemtraSelectionState extends State<KiemtraSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/kiem_tra_toc_do.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Tốc độ",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -227,17 +227,17 @@ class KiemtraSelectionState extends State<KiemtraSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/hoc_go_cau.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Văn bản tự nhập",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),

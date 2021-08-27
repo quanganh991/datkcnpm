@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datk/keyboard/get_device_info.dart';
+import 'package:VietStenoGame/keyboard/get_device_info.dart';
 import 'package:intl/intl.dart';
 
 class switch_screen{

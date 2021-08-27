@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:datk/keyboard/save_keyword_to_firestore.dart';
+import 'package:VietStenoGame/keyboard/save_keyword_to_firestore.dart';
 import 'package:intl/intl.dart';
 
 class StenoRight extends StatefulWidget {
@@ -78,8 +78,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -87,7 +87,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       '*',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -118,8 +118,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -127,7 +127,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'W',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -159,8 +159,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -168,7 +168,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'J',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -200,8 +200,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -209,7 +209,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'N',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -241,8 +241,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -250,7 +250,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'T',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -287,8 +287,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -296,7 +296,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'I',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -328,8 +328,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -337,7 +337,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'Y',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -369,8 +369,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -378,7 +378,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'J',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -410,8 +410,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -419,7 +419,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'G',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -451,8 +451,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -460,7 +460,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'K',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -497,8 +497,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -506,7 +506,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'E',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -538,8 +538,8 @@ class StenoRightKeyboard extends State<StenoRight> {
                   });
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 80.0,
+                  height: 65.0,
+                  width: 65.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -547,7 +547,7 @@ class StenoRightKeyboard extends State<StenoRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'A',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -567,13 +567,13 @@ class StenoRightKeyboard extends State<StenoRight> {
                   save_keyword_to_firestore.save_to_DB();
                 },
                 child: Container(
-                  height: 80.0,
-                  width: 240.0,
+                  height: 65.0,
+                  width: 195.0,
                   child: Container(
                     alignment: Alignment.center,
                     child: Text(
-                      '',
-                      style: TextStyle(color: Colors.purple, fontSize: 50),
+                      'Submit',
+                      style: TextStyle(color: Color(0xFF008742), fontSize: 25),
                       // textAlign: TextAlign.start,
                     ),
                   ),

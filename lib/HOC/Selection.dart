@@ -1,8 +1,9 @@
-import 'package:datk/HOC/Hoc_Go_Am.dart';
-import 'package:datk/HOC/Hoc_Go_Tu_Do.dart';
-import 'package:datk/dialogs/dialog_Hoc_Go_Am.dart';
+import 'package:VietStenoGame/HOC/Hoc_Go_Am.dart';
+import 'package:VietStenoGame/HOC/Hoc_Go_Tu_Do.dart';
+import 'package:VietStenoGame/dialogs/dialog_Hoc_Go_Am.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:datk/HOC/Hoc_Go_Phim.dart';
+import 'package:VietStenoGame/HOC/Hoc_Go_Phim.dart';
 
 import 'Hoc_Go_Cau.dart';
 import 'Hoc_Go_So_Va_Dau_Cau.dart';
@@ -14,6 +15,46 @@ class HocSelection extends StatefulWidget {
 }
 
 class HocSelectionState extends State<HocSelection> {
+  void initState() {
+    super.initState();
+
+    delete_history();
+
+  }
+
+  Future<void> delete_history() async{
+    final QuerySnapshot result = await FirebaseFirestore.instance
+        .collection('datk')
+        .doc('user_typed_recently')
+        .collection('hoc')
+        .where('time', isNotEqualTo: 'not_allowed')
+        .get();
+    final List<DocumentSnapshot> history_deleted = result.docs;
+    for (int i = 0; i < history_deleted.length; i++) {
+      FirebaseFirestore.instance //truy vấn 'messages' theo id
+          .collection('datk') //from messages
+          .doc('user_typed_recently')
+          .collection('hoc')
+          .doc(history_deleted[i]['time']).delete();
+    }
+
+
+    final QuerySnapshot nhap = await FirebaseFirestore.instance
+        .collection('datk')
+        .doc('typing_dart')
+        .collection('typing_dart')
+        .where('time', isNotEqualTo: 'not_allowed')
+        .get();
+    final List<DocumentSnapshot> nhap_deleted = nhap.docs;
+    for (int i = 0; i < nhap_deleted.length; i++) {
+      FirebaseFirestore.instance //truy vấn 'messages' theo id
+          .collection('datk') //from messages
+          .doc('typing_dart')
+          .collection('typing_dart')
+          .doc(nhap_deleted[i]['time']).delete();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +93,7 @@ class HocSelectionState extends State<HocSelection> {
 
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(5.0),
                     padding: const EdgeInsets.symmetric(horizontal: 1.0),
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.red)),
@@ -69,17 +110,17 @@ class HocSelectionState extends State<HocSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/hoc_go_phim.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Học gõ phím",
                                 style:
-                                    TextStyle(color: Colors.blue, fontSize: 20),
+                                    TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -88,7 +129,7 @@ class HocSelectionState extends State<HocSelection> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(5.0),
                     padding: const EdgeInsets.symmetric(horizontal: 1.0),
                     decoration:
                     BoxDecoration(border: Border.all(color: Colors.red)),
@@ -105,17 +146,17 @@ class HocSelectionState extends State<HocSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/hoc_go_am.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Học gõ âm",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -132,7 +173,7 @@ class HocSelectionState extends State<HocSelection> {
 
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(5.0),
                     padding: const EdgeInsets.symmetric(horizontal: 1.0),
                     decoration:
                     BoxDecoration(border: Border.all(color: Colors.red)),
@@ -149,17 +190,17 @@ class HocSelectionState extends State<HocSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/hoc_go_tu.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Học gõ từ",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -168,7 +209,7 @@ class HocSelectionState extends State<HocSelection> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(5.0),
                     padding: const EdgeInsets.symmetric(horizontal: 1.0),
                     decoration:
                     BoxDecoration(border: Border.all(color: Colors.red)),
@@ -185,17 +226,17 @@ class HocSelectionState extends State<HocSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/hoc_go_cau.png',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Học gõ câu",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -212,7 +253,7 @@ class HocSelectionState extends State<HocSelection> {
 
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(5.0),
                     padding: const EdgeInsets.symmetric(horizontal: 1.0),
                     decoration:
                     BoxDecoration(border: Border.all(color: Colors.red)),
@@ -229,17 +270,17 @@ class HocSelectionState extends State<HocSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/hoc_go_so.jpg',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Gõ số",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),
@@ -248,7 +289,7 @@ class HocSelectionState extends State<HocSelection> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(5.0),
                     padding: const EdgeInsets.symmetric(horizontal: 1.0),
                     decoration:
                     BoxDecoration(border: Border.all(color: Colors.red)),
@@ -265,17 +306,17 @@ class HocSelectionState extends State<HocSelection> {
                         children: <Widget>[
                           Image.asset('lib/image/hoc_go_tu_do.jpg',
                               // width: 300,
-                              height: 50,
+                              height: 25,
                               fit: BoxFit.fill),
                           Row(
                             children: [
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 "Gõ tự do",
                                 style:
-                                TextStyle(color: Colors.blue, fontSize: 20),
+                                TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ],
                           ),

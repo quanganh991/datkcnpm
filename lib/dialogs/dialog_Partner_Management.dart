@@ -17,19 +17,7 @@ class DialogPartnerManagementState extends State<DialogPartnerManagement>{
   Widget build(BuildContext context){
     String device_info = widget.device_info;
     return AlertDialog(
-      title:
-
-
-      StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('datk') //truy vấn bảng messages
-            .doc('partner') //where
-            .collection('partner')
-            .doc(device_info)
-            .snapshots(),
-        builder: (BuildContext context, AsyncSnapshot smartphone) {
-          if (smartphone.hasData){
-            return Column(
+      title: Column(
               children: <Widget>[
                 Text(
                   'Đã kết nối với: ',
@@ -39,37 +27,19 @@ class DialogPartnerManagementState extends State<DialogPartnerManagement>{
                 SizedBox(
                   height: 5,
                 ),
-                Image.asset(
-                  "lib/image/"+smartphone.data['image'].toString(),
-                  // width: 300,
-                  height: 50,
-                  fit: BoxFit.fill,
-
-                ),
                 SizedBox(
                   height: 5,
                 ),
                 Text(
-                  smartphone.data['partner'],
+                  device_info,
                   style: TextStyle(
                       color: Colors.red, fontSize: 20),
                 ),
               ],
-            );
-          }
-          else return Container();
-        },
-      ),
+            ),
       // Text("New Dialog"),
       // content: Container(),
       actions: [
-        FlatButton(
-          child: new Text("Ngắt kết nối"),
-          onPressed: () {
-
-            Navigator.of(context).pop();
-          },
-        ),
         FlatButton(
           child: new Text("OK"),
           onPressed: () {

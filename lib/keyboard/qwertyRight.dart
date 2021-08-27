@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:datk/keyboard/save_keyword_to_firestore.dart';
+import 'package:VietStenoGame/keyboard/save_keyword_to_firestore.dart';
 
 class QwertyRight extends StatefulWidget {
   @override
@@ -88,25 +88,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         // alignment: Alignment.bottomLeft,
                         child: Text(
                           '&',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                         ),
                       ),
                       Container(
                         child: Text(
                           '7',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -140,25 +140,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         // alignment: Alignment.bottomLeft,
                         child: Text(
                           '*',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                         ),
                       ),
                       Container(
                         child: Text(
                           '8',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -192,25 +192,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           '(',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           '9',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -244,25 +244,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           ')',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           '0',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -294,25 +294,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           '_',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           '-',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -344,25 +344,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           '+',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           '=',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -394,25 +394,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 90.0,
+                  height: 45.0,
+                  width: 60.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           'Back',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           'space',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -451,8 +451,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -470,7 +470,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           '*',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -504,8 +504,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -523,7 +523,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'W',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -557,8 +557,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -576,7 +576,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'J',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -610,8 +610,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -629,7 +629,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'N',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -663,8 +663,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -682,7 +682,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'T',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -714,25 +714,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           '}',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           ']',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -764,25 +764,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           '|',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           '\\',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -821,8 +821,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -840,7 +840,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'I',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -874,8 +874,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -893,7 +893,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'Y',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -927,8 +927,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -946,7 +946,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'J',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -980,8 +980,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1000,7 +1000,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'G',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -1034,8 +1034,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1054,7 +1054,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'K',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -1088,8 +1088,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 120.0,
+                  height: 45.0,
+                  width: 80.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1097,7 +1097,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'Enter',
-                      style: TextStyle(color: Colors.purple, fontSize: 25),
+                      style: TextStyle(color: Colors.purple, fontSize: 15),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -1106,7 +1106,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
               SizedBox(width: 1),
             ],
           ),
-          //Đang dừng ở dòng thứ 4, phím Shift
+
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -1135,8 +1135,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1154,7 +1154,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'E',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -1188,8 +1188,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1207,7 +1207,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                         alignment: Alignment.center,
                         child: Text(
                           'A',
-                          style: TextStyle(color: Colors.purple, fontSize: 25),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           // textAlign: TextAlign.start,
                         ),
                       ),
@@ -1239,25 +1239,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           '<',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           ',',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -1289,25 +1289,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           '>',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           '.',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -1339,25 +1339,25 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: <Widget>[
                       Container(
                         child: Text(
                           '?',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Container(
                         child: Text(
                           '/',
-                          style: TextStyle(color: Colors.purple, fontSize: 20),
+                          style: TextStyle(color: Colors.purple, fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -1389,8 +1389,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 120.0,
+                  height: 45.0,
+                  width: 90.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1399,7 +1399,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                       alignment: Alignment.center,
                       child: Text(
                         'Shift',
-                        style: TextStyle(color: Colors.purple, fontSize: 25),
+                        style: TextStyle(color: Colors.purple, fontSize: 15),
                       ),
                     ),
                   ),
@@ -1434,8 +1434,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 130.0,
+                  height: 45.0,
+                  width: 100.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1444,7 +1444,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                       alignment: Alignment.center,
                       child: Text(
                         'Space',
-                        style: TextStyle(color: Colors.purple, fontSize: 20),
+                        style: TextStyle(color: Colors.purple, fontSize: 15),
                       ),
                     ),
                   ),
@@ -1474,8 +1474,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 70.0,
+                  height: 45.0,
+                  width: 50.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1483,7 +1483,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'Alt',
-                      style: TextStyle(color: Colors.purple, fontSize: 25),
+                      style: TextStyle(color: Colors.purple, fontSize: 15),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -1514,8 +1514,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1550,8 +1550,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 50.0,
+                  height: 45.0,
+                  width: 45.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1559,7 +1559,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                     alignment: Alignment.center,
                     child: Text(
                       '≡',
-                      style: TextStyle(color: Colors.purple, fontSize: 25),
+                      style: TextStyle(color: Colors.purple, fontSize: 15),
                       // textAlign: TextAlign.start,
                     ),
                   ),
@@ -1589,8 +1589,8 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                   });
                 },
                 child: Container(
-                  height: 50.0,
-                  width: 70.0,
+                  height: 45.0,
+                  width: 45.0,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red, width: 3),
                       borderRadius: BorderRadius.all(Radius.circular(7.0))),
@@ -1598,7 +1598,7 @@ class QwertyRightKeyboard extends State<QwertyRight> {
                     alignment: Alignment.center,
                     child: Text(
                       'Ctrl',
-                      style: TextStyle(color: Colors.purple, fontSize: 25),
+                      style: TextStyle(color: Colors.purple, fontSize: 15),
                       // textAlign: TextAlign.start,
                     ),
                   ),

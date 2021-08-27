@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datk/HOC/Hoc_Go_Am.dart';
-import 'package:datk/HOC/Hoc_Go_Tu_Do.dart';
-import 'package:datk/THI_DAU/Thi_Dau.dart';
-import 'package:datk/dialogs/dialog_Hoc_Go_Am.dart';
+import 'package:VietStenoGame/HOC/Hoc_Go_Am.dart';
+import 'package:VietStenoGame/HOC/Hoc_Go_Tu_Do.dart';
+import 'package:VietStenoGame/THI_DAU/Thi_Dau.dart';
+import 'package:VietStenoGame/dialogs/dialog_Hoc_Go_Am.dart';
 import 'package:flutter/material.dart';
-import 'package:datk/HOC/Hoc_Go_Phim.dart';
-import 'package:datk/keyboard/get_device_info.dart';
+import 'package:VietStenoGame/HOC/Hoc_Go_Phim.dart';
+import 'package:VietStenoGame/keyboard/get_device_info.dart';
 
 class ThiDauSelection extends StatefulWidget {
   @override
