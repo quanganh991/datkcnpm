@@ -35,6 +35,8 @@ class StenoLeftKeyboard extends State<StenoLeft> {
   }
 
   Widget build(BuildContext context) {
+
+
     return Container(
       alignment: Alignment.topRight,
       margin: const EdgeInsets.only(bottom: 3, left: 3, right: 3, top: 35),

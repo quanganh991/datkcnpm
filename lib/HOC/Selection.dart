@@ -1,6 +1,7 @@
 import 'package:VietStenoGame/HOC/Hoc_Go_Am.dart';
 import 'package:VietStenoGame/HOC/Hoc_Go_Tu_Do.dart';
 import 'package:VietStenoGame/dialogs/dialog_Hoc_Go_Am.dart';
+import 'package:VietStenoGame/dialogs/dialog_submit_type.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:VietStenoGame/HOC/Hoc_Go_Phim.dart';
@@ -19,7 +20,6 @@ class HocSelectionState extends State<HocSelection> {
     super.initState();
 
     delete_history();
-
   }
 
   Future<void> delete_history() async{
@@ -57,6 +57,7 @@ class HocSelectionState extends State<HocSelection> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -87,6 +88,8 @@ class HocSelectionState extends State<HocSelection> {
             children: <Widget>[
               const SizedBox(height: 320.0),
               // Image.asset("lib/image/steno_keyboard.jpg"),
+
+
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -328,6 +331,7 @@ class HocSelectionState extends State<HocSelection> {
               ),
             ],
           ),
+          // DialogSubmitType(),
         ],
       ),
     );

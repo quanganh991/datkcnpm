@@ -59,18 +59,31 @@ class RightScreenState extends State<RightScreen> {
                 List<String> time = [];
                 List<String> steno = [];
                 List<String> qwerty = [];
-                List<Color> color = [];
+                List<String> am_dau = [];
+                List<String> am_chinh = [];
+                List<String> am_cuoi = [];
+                List<String> nghia_dau = [];
+                List<String> nghia_chinh = [];
+                List<String> nghia_cuoi = [];
                 if (snapshot.hasData) {
                   for (int i = 0; i < snapshot.data.docs.length; i++) {
                     time.add(snapshot.data.docs[i].data()['time'].toString());
-                    qwerty.add(snapshot.data.docs[i].data()['meaning'].toString());
-                    steno.add(snapshot.data.docs[i].data()['content'].toString());
-                    if (snapshot.data.docs[i].data()['color'].toString() == "green")
-                      color.add(Color(0xFF05D205));
-                    else if (snapshot.data.docs[i].data()['color'].toString() == "yellow")
-                      color.add(Color(0xFFAEB100));
-                    else
-                      color.add(Color(0xFFFF0000));
+                    qwerty.add(
+                        snapshot.data.docs[i].data()['meaning'].toString());
+                    steno.add(
+                        snapshot.data.docs[i].data()['content'].toString());
+                    am_dau
+                        .add(snapshot.data.docs[i].data()['am_dau'].toString());
+                    am_chinh.add(
+                        snapshot.data.docs[i].data()['am_chinh'].toString());
+                    am_cuoi.add(
+                        snapshot.data.docs[i].data()['am_cuoi'].toString());
+                    nghia_dau.add(
+                        snapshot.data.docs[i].data()['nghia_dau'].toString());
+                    nghia_chinh.add(
+                        snapshot.data.docs[i].data()['nghia_chinh'].toString());
+                    nghia_cuoi.add(
+                        snapshot.data.docs[i].data()['nghia_cuoi'].toString());
                   }
                   return Container(
                     height: MediaQuery.of(context).size.height * 0.27,
@@ -112,17 +125,36 @@ class RightScreenState extends State<RightScreen> {
                                       time[i],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: color[i],
+                                          color: Color(0xFFBA0E0E),
                                           fontSize: 14),
                                     ),
                                   ]),
                                   Column(children: [
-                                    Text(
-                                      steno[i] +" ---> "+ qwerty[i],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: color[i],
-                                          fontSize: 14),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          steno[i].toUpperCase() +
+                                              " - " +
+                                              am_dau[i].toUpperCase() +
+                                              " " +
+                                              am_chinh[i].toUpperCase() +
+                                              " " +
+                                              am_cuoi[i].toUpperCase(),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF0E9702),
+                                              fontSize: 14),
+                                        ),
+                                        Text(
+                                          qwerty[i],
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF510297),
+                                              fontSize: 14),
+                                        ),
+                                      ],
                                     ),
                                   ]),
                                 ]),

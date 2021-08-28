@@ -20,8 +20,6 @@ class HintStenoWordDialogState extends State<HintStenoWordDialog> {
   @override
   Widget build(BuildContext context) {
     String qwerty = widget.qwerty_word;
-    print("truyền sang gợi ý = "+qwerty);
-    //tách câu thành các từ đơn lẻ
     List<String> split_qwerty = qwerty.split(" ");
 
     for(int i=0;i<split_qwerty.length;i++){

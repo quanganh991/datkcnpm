@@ -80,75 +80,99 @@ class save_keyword_to_firestore{
     //điều chỉnh lại hoán vị của từ mà người dùng vừa mới gõ
 
     //2.2. 3 vòng lặp xác định cấu tạo của từ vừa gõ
-    bool danh_van_duoc = false;
-    String tu_danh_van = '';
+    String nghia_danh_van = '';
+    String am_dau = '';
+    String am_chinh = '';
+    String am_cuoi = '';
+    String nghia_dau = '';
+    String nghia_chinh = '';
+    String nghia_cuoi = '';
     outerloop:
     for(int i=0;i<tat_ca_am_dau.length;i++){
       for(int j=0;j<tat_ca_am_chinh.length;j++){
         for(int k=0;k<tat_ca_am_cuoi.length;k++){
           if (configs.kiem_tra_hoan_vi(tat_ca_am_dau[i].toString() + tat_ca_am_chinh[j].toString() + tat_ca_am_cuoi[k].toString(),tu_nguoi_dung_vua_moi_go.toLowerCase())){  //ko cần đúng thứ tự
             print("Đầu chính cuối "+tat_ca_am_dau[i].toString() +" "+ tat_ca_am_chinh[j].toString() +" "+ tat_ca_am_cuoi[k].toString()+ " vừa gõ "+tu_nguoi_dung_vua_moi_go);
+
+
             tu_nguoi_dung_vua_moi_go = tat_ca_am_dau[i].toString() + tat_ca_am_chinh[j].toString() + tat_ca_am_cuoi[k].toString();
-            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_dau[i], tat_ca_nghia_chinh[j], tat_ca_nghia_cuoi[k]);
-            if (danh_van_duoc == true){
-              tu_danh_van = tat_ca_nghia_dau[i] + tat_ca_nghia_chinh[j] + tat_ca_nghia_cuoi[k];
-            }
+            nghia_danh_van = tat_ca_nghia_dau[i] + tat_ca_nghia_chinh[j] + tat_ca_nghia_cuoi[k];
+
+            am_dau = tat_ca_am_dau[i];
+            am_chinh = tat_ca_am_chinh[j];
+            am_cuoi = tat_ca_am_cuoi[k];
+            nghia_dau = tat_ca_nghia_dau[i];
+            nghia_chinh = tat_ca_nghia_chinh[j];
+            nghia_cuoi = tat_ca_nghia_cuoi[k];
+
             break outerloop;
           } else if (configs.kiem_tra_hoan_vi(tat_ca_am_chinh[j].toString() + tat_ca_am_cuoi[k].toString(),tu_nguoi_dung_vua_moi_go.toLowerCase())){
             print("Chính cuối "+tat_ca_am_chinh[j].toString() +" "+ tat_ca_am_cuoi[k].toString()+ " vừa gõ "+tu_nguoi_dung_vua_moi_go);
             tu_nguoi_dung_vua_moi_go = tat_ca_am_chinh[j].toString() + tat_ca_am_cuoi[k].toString();
-            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko('',tat_ca_nghia_chinh[j], tat_ca_nghia_cuoi[k]);
-            if (danh_van_duoc == true){
-              tu_danh_van =tat_ca_nghia_chinh[j] + tat_ca_nghia_cuoi[k];
-            }
+
+            nghia_danh_van =tat_ca_nghia_chinh[j] + tat_ca_nghia_cuoi[k];
+
+            am_chinh = tat_ca_am_chinh[j];
+            am_cuoi = tat_ca_am_cuoi[k];
+            nghia_chinh = tat_ca_nghia_chinh[j];
+            nghia_cuoi = tat_ca_nghia_cuoi[k];
+
             break outerloop;
           } else if (configs.kiem_tra_hoan_vi(tat_ca_am_dau[i].toString() + tat_ca_am_cuoi[k].toString(),tu_nguoi_dung_vua_moi_go.toLowerCase())){
             print("Đầu cuối "+tat_ca_am_dau[i].toString() +" "+ tat_ca_am_cuoi[k].toString()+ " vừa gõ "+tu_nguoi_dung_vua_moi_go);
             tu_nguoi_dung_vua_moi_go = tat_ca_am_dau[i].toString() + tat_ca_am_cuoi[k].toString();
-            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_dau[i],'' ,tat_ca_nghia_cuoi[k]);
-            if (danh_van_duoc == true){
-              tu_danh_van =tat_ca_nghia_dau[i] + tat_ca_nghia_cuoi[k];
-            }
+            nghia_danh_van =tat_ca_nghia_dau[i] + tat_ca_nghia_cuoi[k];
+
+            am_dau = tat_ca_am_dau[i];
+            am_cuoi = tat_ca_am_cuoi[k];
+            nghia_dau = tat_ca_nghia_dau[i];
+            nghia_cuoi = tat_ca_nghia_cuoi[k];
+
             break outerloop;
           } else if (configs.kiem_tra_hoan_vi(tat_ca_am_dau[i].toString() + tat_ca_am_chinh[j].toString(),tu_nguoi_dung_vua_moi_go.toLowerCase())){
             print("Đầu chính "+tat_ca_am_dau[i].toString() +" "+ tat_ca_am_chinh[j].toString() + " vừa gõ "+tu_nguoi_dung_vua_moi_go);
             tu_nguoi_dung_vua_moi_go = tat_ca_am_dau[i].toString() + tat_ca_am_chinh[j].toString();
-            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_dau[i], tat_ca_nghia_chinh[j],'');
-            if (danh_van_duoc == true){
-              tu_danh_van =tat_ca_nghia_dau[i] + tat_ca_nghia_chinh[j];
-            }
+            nghia_danh_van =tat_ca_nghia_dau[i] + tat_ca_nghia_chinh[j];
+
+            am_dau = tat_ca_am_dau[i];
+            am_chinh = tat_ca_am_chinh[j];
+            nghia_dau = tat_ca_nghia_dau[i];
+            nghia_chinh = tat_ca_nghia_chinh[j];
+
             break outerloop;
           } else if (configs.kiem_tra_hoan_vi(tat_ca_am_dau[i].toString(),tu_nguoi_dung_vua_moi_go.toLowerCase())){
             print("Đầu "+tat_ca_am_dau[i].toString() +" vừa gõ "+tu_nguoi_dung_vua_moi_go);
             tu_nguoi_dung_vua_moi_go = tat_ca_am_dau[i].toString();
-            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_dau[i],'','');
-            if (danh_van_duoc == true){
-              tu_danh_van =tat_ca_nghia_dau[i];
-            }
+            nghia_danh_van =tat_ca_nghia_dau[i];
+
+            am_dau = tat_ca_am_dau[i];
+            nghia_dau = tat_ca_nghia_dau[i];
+
             break outerloop;
           } else if (configs.kiem_tra_hoan_vi(tat_ca_am_chinh[j].toString(),tu_nguoi_dung_vua_moi_go.toLowerCase())){
             print("Chính "+tat_ca_am_chinh[j].toString() +" vừa gõ "+tu_nguoi_dung_vua_moi_go);
 
             tu_nguoi_dung_vua_moi_go = tat_ca_am_chinh[j].toString();
-            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_chinh[j],'','');
-            if (danh_van_duoc == true){
-              tu_danh_van =tat_ca_nghia_chinh[j];
-            }
+            nghia_danh_van =tat_ca_nghia_chinh[j];
+
+            am_chinh = tat_ca_am_chinh[j];
+            nghia_chinh = tat_ca_nghia_chinh[j];
+
             break outerloop;
           } else if (configs.kiem_tra_hoan_vi(tat_ca_am_cuoi[k].toString(),tu_nguoi_dung_vua_moi_go.toLowerCase())){
             print("Cuối "+tat_ca_am_cuoi[k].toString() +" vừa gõ "+tu_nguoi_dung_vua_moi_go);
             tu_nguoi_dung_vua_moi_go = tat_ca_am_cuoi[k].toString();
-            danh_van_duoc = configs.kiem_tra_xem_danh_van_duoc_hay_ko(tat_ca_nghia_cuoi[k],'','');
-            if (danh_van_duoc == true){
-              tu_danh_van =tat_ca_nghia_cuoi[k];
-            }
+            nghia_danh_van =tat_ca_nghia_cuoi[k];
+
+            am_cuoi = tat_ca_am_cuoi[k];
+            nghia_cuoi = tat_ca_nghia_cuoi[k];
+
             break outerloop;
           }
         }
       }
     }
 
-    print("VỪa gõ từ "+tu_danh_van.toString());
     //3. kiểm tra xem từ vừa gõ có phải là tốc ký ko
     final QuerySnapshot all_single_steno_letters = await FirebaseFirestore.instance
         .collection('datk')
@@ -156,7 +180,15 @@ class save_keyword_to_firestore{
         .collection('dictionary')
         .where('key', isEqualTo: tu_nguoi_dung_vua_moi_go.toUpperCase()) //tìm trong bộ từ điển xem có từ tốc ký đó không
         .get();
-    final List<DocumentSnapshot> all_valid_steno = all_single_steno_letters.docs;
+    final List<DocumentSnapshot> valid_steno = all_single_steno_letters.docs;
+    List<String> all_valid_steno = [];
+    String all_valid_steno_string = "";
+    if (valid_steno.length > 0) { //nếu trong nháp có thông tin thì lưu chúng vào DB chính thức
+      for (int i=0;i<valid_steno.length;i++){
+        all_valid_steno.add(valid_steno[i]["value"]);
+        all_valid_steno_string+=valid_steno[i]["value"]+" ";
+      }
+    }
     // //kiểm tra xong
 
     //4. Kiểm tra từ đó đúng hay sai
@@ -178,8 +210,6 @@ class save_keyword_to_firestore{
     if (tu_nguoi_dung_vua_moi_go!='') {
       //từ đó đánh vần được thì mới thêm
       //từ đó là tốc ký thì mới thêm
-      if(all_valid_steno.length > 0 || tu_danh_van != '') { //hoặc là đánh vần được, hoặc là xuất hiện trong bộ từ điển
-        print("Từ đánh vần được là "+tu_danh_van);
         int timeInMillis = int.parse(DateTime
             .now()
             .millisecondsSinceEpoch
@@ -197,20 +227,15 @@ class save_keyword_to_firestore{
           transaction.set(
             documentReference,
             {
-              'meaning': tu_danh_van.toString(),
+              'am_dau': am_dau,
+              'am_chinh': am_chinh,
+              'am_cuoi': am_cuoi,
+              'nghia_dau':nghia_dau,
+              'nghia_chinh': nghia_chinh,
+              'nghia_cuoi':nghia_cuoi,
+              'meaning': all_valid_steno_string,
               'content': tu_nguoi_dung_vua_moi_go,
               'time': formattedDate.toString(),
-              'color': all_answer_key.contains(tu_nguoi_dung_vua_moi_go.toUpperCase()) == true ? 'green' //có trong bộ đáp án thì màu xanh
-                  : //ko có trong bộ đáp án thì hoặc màu đỏ, hoặc màu vàng
-              (
-              //tu_danh_van == '' nếu từ đó hoặc là sai cú pháp, hoặc là không đánh vần được
-                  all_valid_steno.length == 0
-              ?
-              'yellow'//ko có trong bộ đáp án, ko có trong từ điển thì màu vàng
-               :
-               'red'  //ko có trong bộ đáp án, nhưng có trong từ điển, thì màu đỏ
-              )
-              ,
             },
           );
         });
@@ -224,7 +249,7 @@ class save_keyword_to_firestore{
               .doc('typing_dart')
               .collection('typing_dart')
               .where('time',isEqualTo: 'not_allowed')
-              .get();
+              .get(); //lấy vị trí con trỏ hiện tại
           final List<DocumentSnapshot> get_current_cursor = current_cursor.docs;
           int cursor = int.parse(get_current_cursor[0]['typing_index'].toString());
           var moving_cursor = FirebaseFirestore
@@ -246,20 +271,6 @@ class save_keyword_to_firestore{
           });
           //di chuyển con trỏ xong
         }
-      }
-      else {
-        Fluttertoast.showToast(
-            msg: "Từ vừa gõ không phải từ tốc ký, vui lòng kiểm gõ lại",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0
-        );
-      }
-
-
 
       //6. Xóa nháp
       for (int i = 0; i < DART.length; i++) {

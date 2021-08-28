@@ -163,14 +163,14 @@ class LichSuState extends State<LichSu> {
                                 features: feature,
                                 size: Size(
                                     MediaQuery. of(context). size. width * 0.97,
-                                    MediaQuery. of(context). size. height * 0.55),
-                                labelX: ['Gõ âm', 'Gõ phím', 'Gõ từ', 'Gõ câu', 'Gõ số', 'Gõ tự do'],
+                                    MediaQuery. of(context). size. height * 0.35),
+                                labelX: ['Gõ\nâm', 'Gõ\nphím', 'Gõ\ntừ', 'Gõ\ncâu', 'Gõ\nsố', 'Gõ\ntự do'],
                                 labelY: ['20%', '40%', '60%', '80%', '100%'],
-                                showDescription: true,
+                                showDescription: false,
                                 graphColor: Color(0xFFFFFFFF),
                                 graphOpacity: 0.2,
                                 verticalFeatureDirection: true,
-                                descriptionHeight: 130,
+                                // descriptionHeight: 130,
 
                               ),
                             ],);

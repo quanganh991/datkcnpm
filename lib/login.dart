@@ -66,7 +66,7 @@ class LoginScreenState extends State<LoginScreen> {
         await SharedPreferences.getInstance(); //moi các trường trong firebase
     print("prefs đăng xuất = " + prefs.toString());
 
-    await googleSignIn.signOut();
+    // await googleSignIn.signOut();
     isLoggedIn = await googleSignIn.isSignedIn();
     print("isLoggedIn = " + isLoggedIn.toString());
     if (isLoggedIn) {

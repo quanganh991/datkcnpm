@@ -15,7 +15,6 @@ class LeftScreen extends StatefulWidget {
 }
 
 class LeftScreenState extends State<LeftScreen> {
-  // var tu_can_go = configs.random_words();
   Stream<QuerySnapshot<Map<String, dynamic>>> query_question_banking(String type){
     return
       type == 'random'
@@ -34,7 +33,6 @@ class LeftScreenState extends State<LeftScreen> {
           .snapshots()
       ;
   }
-
   late Stream<QuerySnapshot<Map<String, dynamic>>> tu_can_go;
 
   void initState() {
@@ -51,7 +49,6 @@ class LeftScreenState extends State<LeftScreen> {
     });
 
     tu_can_go = query_question_banking(widget.type);
-
   }
 
   String TuCanGo = '';
@@ -90,6 +87,9 @@ class LeftScreenState extends State<LeftScreen> {
                   ),
                 ),
               ),
+
+
+
               Material(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 6.0),
@@ -106,24 +106,12 @@ class LeftScreenState extends State<LeftScreen> {
                 ),
                 color: Color(0xFFFFDADA),
               ),
-              Center(
-                child: IconButton(
-                  icon: Icon(Icons.help_outline),
-                  onPressed: () => {
-                    showDialog(
-                        context: context,
-                        builder: (_) =>
-                            HintStenoWordDialog(qwerty_word: TuCanGo))
-                  },
-                  color: Colors.grey,
-                ),
-              ),
             ],
           ),
           Row(
             children: [
               Container(
-                  height: 100.0,
+                  height: 40.0,
                   width: MediaQuery.of(context).size.width * 0.95,
                   margin: const EdgeInsets.all(5.0),
                   padding: const EdgeInsets.symmetric(horizontal: 1.0),
@@ -138,7 +126,6 @@ class LeftScreenState extends State<LeftScreen> {
                           TuCanGo = snapshot.data.docs[word_index]
                               .data()['sentences']
                               .toString();
-
                           FirebaseFirestore.instance
                               .collection('datk') //bảng user
                               .doc('typing_dart') //tại id mới
@@ -241,7 +228,7 @@ class LeftScreenState extends State<LeftScreen> {
           Row(
             children: [
               Container(
-                height: 50.0,
+                height: 40.0,
                 width: MediaQuery.of(context).size.width * 0.95,
                 margin: const EdgeInsets.all(5.0),
                 padding: const EdgeInsets.symmetric(horizontal: 1.0),
@@ -260,25 +247,128 @@ class LeftScreenState extends State<LeftScreen> {
                             builder: (BuildContext context,
                                 AsyncSnapshot mapping_word) {
                               if (mapping_word.hasData && mapping_word.data.docs.length > 0) {
-                                int color = 0;
-                                if (mapping_word.data.docs[0].data()['color'].toString() == "green"){
-                                  color = 0xFF05D205;
-                                } else if (mapping_word.data.docs[0].data()['color'].toString() == "red"){
-                                  color = 0xFFFF0000;
-                                } else if (mapping_word.data.docs[0].data()['color'].toString() == "yellow"){
-                                  color = 0xFFAEB100;
-                                }
                                 return Text(
-                                  mapping_word.data.docs[0].data()['meaning'].toString() + ( color != 0xFFAEB100 ? "" : " (Từ này không có nghĩa)"),
-                                  style: TextStyle(
-                                      color:
-                                      Color(color)
-                                      , fontSize: 20),
+                                  mapping_word.data.docs[0].data()['meaning'].toString(),
+                                  style: TextStyle(fontSize: 20),
                                 );
                               } else {
                                 return Container();
                               }
                             }),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                // margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                // padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                child: FlatButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Gợi ý",
+                            style: TextStyle(
+                                color: Color(0xFF005E2D), fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                height: 40.0,
+                width: MediaQuery.of(context).size.width * 0.95,
+                margin: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                decoration:
+                BoxDecoration(border: Border.all(color: Color(0xFF849A00))),
+                child: StreamBuilder(
+                  //realtime
+                    stream: FirebaseFirestore.instance
+                        .collection('datk') //from messages
+                        .doc('typing_dart')
+                        .collection('typing_dart')
+                        .where('time', isEqualTo: "not_allowed")
+                        .limit(1)
+                        .snapshots(), //lấy ra con trỏ vị trí của từ đang gõ
+                    builder: (BuildContext context,
+                        AsyncSnapshot mapping_word) {
+                      if (mapping_word.hasData && mapping_word.data.docs.length > 0) {
+                        if (TuCanGo.toString() == 'null')
+                          return Container();
+                        else {
+                          int cursor = int.parse(mapping_word.data.docs[0]
+                              .data()['typing_index']
+                              .toString()); //lấy vị trí con trỏ
+                          String qwerty = TuCanGo;
+                          List<String> split_qwerty = qwerty.split(" ");
+
+                          for(int i=0;i<split_qwerty.length;i++){
+                            print(split_qwerty[i]);
+                          }
+                          //lấy đáp án của tất cả các câu hỏi
+                          return StreamBuilder(
+                            //realtime
+                              stream: FirebaseFirestore.instance
+                                  .collection('datk') //from messages
+                                  .doc('dictionary')
+                                  .collection('dictionary')
+                                  .where('value', isEqualTo: split_qwerty[cursor%split_qwerty.length])  //isEqualto mùa, xuân, hoa, nở
+                                  .limit(1)
+                                  .snapshots(), //lấy từ vừa gõ
+                              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                if (!snapshot.hasData || snapshot.hasError || snapshot.data.docs.length < 1) {
+                                  return Container();
+                                }
+                                else {
+
+                                    FirebaseFirestore.instance
+                                        .collection('datk') //bảng user
+                                        .doc('typing_dart') //tại id mới
+                                        .collection('answer_key')
+                                        .doc('0')
+                                        .set({
+                                      '0':snapshot.data.docs[0]
+                                          .data()['key']
+                                          .toString()
+                                    });
+
+                                     String hint = snapshot.data.docs[0]
+                                          .data()['key']
+                                          .toString()
+                                          +
+                                          " -> "
+                                          +
+                                          snapshot.data.docs[0]
+                                              .data()['value']
+                                              .toString()
+                                          +
+                                          "\n";
+                                  return Text(
+                                      hint,
+                                      style: TextStyle(
+                                      color: Color(0xFFFF1919),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold));
+                                }
+                              });
+                        }
+                      } else {
+                        return Container();
+                      }
+                    }),
               ),
             ],
           ),
